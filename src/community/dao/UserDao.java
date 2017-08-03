@@ -17,8 +17,7 @@ import community.exception.SQLRuntimeException;
 
 public class UserDao {
 
-	public User getUser(Connection connection, String login_id,
-			String password) {
+	public User getUser(Connection connection, String login_id, String password) {
 
 		PreparedStatement ps = null;
 		try {
@@ -62,13 +61,13 @@ public class UserDao {
 
 				User users = new User();
 				users.setId(id);
-				users.setLogin_id(login_id);
+				users.setLoginId(login_id);
 				users.setPassword(password);
 				users.setName(name);
-				users.setBranch_id(branch_id);
-				users.setJob_id(job_id);
-				users.setIs_stopped(is_stopped);
-				users.setCreated_at(created_at);
+				users.setBranchId(branch_id);
+				users.setJobId(job_id);
+				users.setIsStopped(is_stopped);
+				users.setCreatedAt(created_at);
 				users.setUpdateDate(updated_at);
 
 				ret.add(users);
@@ -109,12 +108,12 @@ public class UserDao {
 
 			ps = connection.prepareStatement(sql.toString());
 
-			ps.setString(1, users.getLogin_id());
+			ps.setString(1, users.getLoginId());
 			ps.setString(2, users.getPassword());
 			ps.setString(3, users.getName());
-			ps.setInt(4, users.getBranch_id());
-			ps.setInt(5, users.getJob_id());
-			ps.setInt(6, users.getIs_stopped());
+			ps.setInt(4, users.getBranchId());
+			ps.setInt(5, users.getJobId());
+			ps.setInt(6, users.getIsStopped());
 
 			ps.executeUpdate();
 		} catch (SQLException e) {
@@ -143,11 +142,11 @@ public class UserDao {
 
 			ps = connection.prepareStatement(sql.toString());
 
-			ps.setString(1, users.getLogin_id());
+			ps.setString(1, users.getLoginId());
 			ps.setString(2, users.getPassword());
 			ps.setString(3, users.getName());
-			ps.setInt(4, users.getBranch_id());
-			ps.setInt(5, users.getJob_id());
+			ps.setInt(4, users.getBranchId());
+			ps.setInt(5, users.getJobId());
 			ps.setInt(6, users.getId());
 			ps.setTimestamp(7,
 					new Timestamp(users.getUpdateDate().getTime()));

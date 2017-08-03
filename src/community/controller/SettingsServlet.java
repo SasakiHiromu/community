@@ -82,11 +82,11 @@ public class SettingsServlet extends HttpServlet {
 		UserService userservice = new UserService();
 		User editUser = userservice.getUser(Integer.parseInt(request.getParameter("id")));
 
-		editUser.setLogin_id(request.getParameter("login_id"));
+		editUser.setLoginId(request.getParameter("login_id"));
 		editUser.setPassword(request.getParameter("password"));
 		editUser.setName(request.getParameter("name"));
-		editUser.setBranch_id(Integer.parseInt(request.getParameter("branch_id")));
-		editUser.setJob_id(Integer.parseInt(request.getParameter("job_id")));
+		editUser.setBranchId(Integer.parseInt(request.getParameter("branch_id")));
+		editUser.setJobId(Integer.parseInt(request.getParameter("job_id")));
 		return editUser;
 	}
 

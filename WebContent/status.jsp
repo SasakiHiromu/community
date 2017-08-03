@@ -24,7 +24,7 @@
 
 	<c:forEach items="${allusers}" var="alluser">
 		<tr>
-			<td>${alluser.login_id}</td>
+			<td>${alluser.loginId}</td>
 			<td>${alluser.name}</td>
 				<c:forEach items="${allbranches}" var="allbranches">
 					<c:if test="${alluser.id == allbranches.id}">
@@ -45,13 +45,13 @@
 			<td>
 				<form action="stopped" method="post">
 					<input type="hidden" name="id" value="${alluser.id}">
-					<c:if test="${alluser.is_stopped == 0}">
-						<input type="hidden" name="is_stopped" value=1>
+					<c:if test="${alluser.isStopped == 0}">
+						<input type="hidden" name="isStopped" value=1>
 						<button type="submit">停止</button>
 					</c:if>
 
-					<c:if test="${alluser.is_stopped == 1}">
-						<input type="hidden" name="is_stopped" value=0>
+					<c:if test="${alluser.isStopped == 1}">
+						<input type="hidden" name="isStopped" value=0>
 						<button type="submit">復活</button>
 					</c:if>
 				</form>

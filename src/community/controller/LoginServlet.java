@@ -30,11 +30,11 @@ public class LoginServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws IOException, ServletException {
 
-		String login_id = request.getParameter("login_id");
+		String loginId = request.getParameter("loginId");
 		String password = request.getParameter("password");
 
 		LoginService loginService = new LoginService();
-		User users = loginService.login(login_id, password);
+		User users = loginService.login(loginId, password);
 
 		HttpSession session = request.getSession();
 		if (users != null) {
@@ -42,7 +42,7 @@ public class LoginServlet extends HttpServlet {
 			session.setAttribute("loginUser", users);
 			response.sendRedirect("./");
 		} else {
-			request.setAttribute("login_id", login_id);
+			request.setAttribute("loginId", loginId);
 			List<String> messages = new ArrayList<String>();
 			messages.add("ログインに失敗しました。");
 			session.setAttribute("errorMessages", messages);

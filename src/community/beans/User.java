@@ -7,13 +7,13 @@ public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private int id;
-	private String 	login_id;
+	private String 	loginId;
 	private String 	password;
 	private String 	name;
-	private int	   	branch_id;
-	private int   	job_id;
-	private int    	is_stopped;
-	private Date 	created_at;
+	private int	   	branchId;
+	private int		jobId;
+	private int		isStopped;
+	private Date 	createdAt;
 	private Date 	updateDate;
 
 	public int getId() {
@@ -24,12 +24,12 @@ public class User implements Serializable {
 		this.id = id;
 	}
 
-	public String getLogin_id() {
-		return login_id;
+	public String getLoginId() {
+		return loginId;
 	}
 
-	public void setLogin_id(String login_id) {
-		this.login_id = login_id;
+	public void setLoginId(String login_id) {
+		this.loginId = login_id;
 	}
 
 	public String getPassword() {
@@ -48,37 +48,32 @@ public class User implements Serializable {
 		this.name = name;
 	}
 
-	public int getBranch_id() {
-		return branch_id;
+	public int getBranchId() {
+		return branchId;
 	}
 
-	public void setBranch_id(int branch_id) {
-		this.branch_id = branch_id;
+	public void setBranchId(int branch_id) {
+		this.branchId = branch_id;
 	}
 
-	public int getJob_id() {
-		return job_id;
+	public int getJobId() {
+		return jobId;
 	}
 
-	public void setJob_id(int job_id) {
-		this.job_id = job_id;
+	public void setJobId(int job_id) {
+		this.jobId = job_id;
 	}
 
-	public int getIs_stopped() {
-		return is_stopped;
+	public int getIsStopped() {
+		return isStopped;
 	}
 
-	public void setIs_stopped(int is_stopped) {
-		this.is_stopped = is_stopped;
+	public Date getCreatedAt() {
+		return createdAt;
 	}
 
-
-	public Date getCreated_at() {
-		return created_at;
-	}
-
-	public void setCreated_at(Date created_at) {
-		this.created_at = created_at;
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
 	}
 
 	public Date getUpdateDate() {
@@ -87,6 +82,14 @@ public class User implements Serializable {
 
 	public void setUpdateDate(Date updateDate) {
 		this.updateDate = updateDate;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	public void setIsStopped(int isStopped) {
+		this.isStopped = isStopped;
 	}
 
 }

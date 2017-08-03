@@ -36,12 +36,12 @@ public class SignUpServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 
 		User users = new User();
-		users.setLogin_id(request.getParameter("login_id"));
+		users.setLoginId(request.getParameter("login_id"));
 		users.setPassword(request.getParameter("password"));
 		users.setName(request.getParameter("name"));
-		users.setBranch_id(Integer.parseInt(request.getParameter("branch_id")));
-		users.setJob_id(Integer.parseInt(request.getParameter("job_id")));
-		users.setIs_stopped(0);
+		users.setBranchId(Integer.parseInt(request.getParameter("branch_id")));
+		users.setJobId(Integer.parseInt(request.getParameter("job_id")));
+		users.setIsStopped(0);
 
 		if (isValid(request, messages) == true) {
 

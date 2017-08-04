@@ -34,9 +34,11 @@
 	本文<div class="text"><c:out value="${message.text}" /></div>
 	投稿日時<div class="date"><fmt:formatDate value="${message.createdAt}"
 	pattern="yyyy/MM/dd HH:mm:ss" /></div>
+	<form action="commentDelete" method="post"><br />
+		<button type="submit" name="message_id" value="${message.id}">削除</button>
+	</form>
 	</div>
 
-		<br />
 		<c:forEach items="${comments}" var="comment">
 			<c:if test="${message.id == comment.messageId}" >
 				<span class="text"><c:out value="${comment.text}" /></span><br />
@@ -47,16 +49,15 @@
 				</c:forEach>
 				<c:forEach items="${alljobs}" var="alljob">
 					<c:if test="${comment.jobId == alljob.id}">
-						<span class="job_id"><c:out value="${alljob.name}" /></span><br />
+						<span class="job_id"><c:out value="${alljob.name}" /></span>
 					</c:if>
 				</c:forEach>
 			</c:if>
+			<form action="commentDelete" method="post"><br />
+				<button type="submit" name="comment_id" value="${comment.id}">削除</button>
+			</form>
 		</c:forEach>
-		<form action="" method="post"><br />
-			<input type="hidden" name="" value="${comment.id}" />
-			<button type="submit"  name="loginUser" value="${loginUser.id}">削除</button>
-			<p></p>
-		</form>
+
 
 		<form action="newComment" method="post"><br />
 			<textarea name="text" rows="4" cols="40"></textarea><br />

@@ -58,14 +58,14 @@ public class CommentService {
 		}
 	}
 
-	public void delete(Comment comments) {
+	public void delete(int id) {
 
 		Connection connection = null;
 		try {
 			connection = getConnection();
 
 			CommentDao commentDao = new CommentDao();
-			commentDao.delete(connection, comments);
+			commentDao.delete(connection, id);
 
 			commit(connection);
 		} catch (RuntimeException e) {

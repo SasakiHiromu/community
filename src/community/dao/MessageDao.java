@@ -41,9 +41,9 @@ public class MessageDao {
 			ps.setString(1, messages.getTitle());
 			ps.setString(2, messages.getText());
 			ps.setString(3, messages.getCategory());
-			ps.setInt	(4, messages.getBranch_id());
-			ps.setInt	(5, messages.getJob_id());
-			ps.setInt	(6, messages.getUser_id());
+			ps.setInt	(4, messages.getBranchId());
+			ps.setInt	(5, messages.getJobId());
+			ps.setInt	(6, messages.getUserId());
 
 			ps.executeUpdate();
 		} catch (SQLException e) {

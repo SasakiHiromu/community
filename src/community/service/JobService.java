@@ -17,8 +17,8 @@ public class JobService {
 		try {
 			connection = getConnection();
 
-			JobDao JobDao = new JobDao();
-			List<Job> jobs = JobDao.getAllJob(connection);
+			JobDao jobDao = new JobDao();
+			List<Job> jobs = jobDao.getAllJob(connection);
 
 			commit(connection);
 

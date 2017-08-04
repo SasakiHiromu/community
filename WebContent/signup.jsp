@@ -22,8 +22,8 @@
 	<c:remove var="errorMessages" scope="session"/>
 </c:if>
 <form action="signup" method="post"><br />
-	<label for="login_id">ID</label>
-	<input name="login_id" id="login_id" value="${user.login_id}"/> <br />
+	<label for="loginId">ID</label>
+	<input name="loginId" id="loginId" value="${user.loginId}"/> <br />
 
 	<label for="password">パスワード</label>
 	<input name="password" id="password" value="${user.password}"/> <br />
@@ -31,11 +31,11 @@
 	<label for="name">名前</label>
 	<input name="name"  id="name"/> <br />
 
-	<label for="branch_id">支店名</label>
-	<input name="branch_id" id="branch_id"/> <br />
+	<label for="branchId">支店名</label>
+	<input name="branchId" id="branchId"/> <br />
 
-	<label for="job_id">役職</label>
-	<input name="job_id"id="job_id"></input> <br />
+	<label for="jobId">役職</label>
+	<input name="jobId"id="jobId"></input> <br />
 
 	<input type="submit" value="登録" /> <br />
 	<a href="./">戻る</a>

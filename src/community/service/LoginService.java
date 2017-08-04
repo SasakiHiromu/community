@@ -11,7 +11,7 @@ import community.utils.CipherUtil;
 
 public class LoginService {
 
-	public User login(String rogin_id, String password) {
+	public User login(String loginId, String password) {
 
 		Connection connection = null;
 		try {
@@ -20,7 +20,7 @@ public class LoginService {
 			UserDao userDao = new UserDao();
 			String encPassword = CipherUtil.encrypt(password);
 			User user = userDao
-					.getUser(connection, rogin_id, encPassword);
+					.getUser(connection, loginId, encPassword);
 
 			commit(connection);
 

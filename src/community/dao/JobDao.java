@@ -38,11 +38,11 @@ public class JobDao {
 				int id = rs.getInt("id");
 				String name = rs.getString("name");
 
-				Job Jobs = new Job();
-				Jobs.setId(id);
-				Jobs.setName(name);
+				Job jobs = new Job();
+				jobs.setId(id);
+				jobs.setName(name);
 
-				ret.add(Jobs);
+				ret.add(jobs);
 			}
 			return ret;
 		} finally {

@@ -10,11 +10,11 @@ public class Message implements Serializable {
 	private String title;
 	private String text;
 	private String category;
-	private int branch_id;
-	private int job_id;
-	private int user_id;
-	private Date created_at;
-	private Date updated_at;
+	private int branchId;
+	private int jobId;
+	private int userId;
+	private Date createdAt;
+	private Date updatedAt;
 
 	public int getId() {
 		return id;
@@ -40,40 +40,34 @@ public class Message implements Serializable {
 	public void setCategory(String category) {
 		this.category = category;
 	}
-	public int getBranch_id() {
-		return branch_id;
+	public int getBranchId() {
+		return branchId;
 	}
-	public void setBranch_id(int branch_id) {
-		this.branch_id = branch_id;
+	public void setBranchId(int branchId) {
+		this.branchId = branchId;
 	}
-	public int getJob_id() {
-		return job_id;
+	public int getJobId() {
+		return jobId;
 	}
-	public void setJob_id(int job_id) {
-		this.job_id = job_id;
+	public void setJobId(int jobId) {
+		this.jobId = jobId;
 	}
-	public int getUser_id() {
-		return user_id;
+	public int getUserId() {
+		return userId;
 	}
-	public void setUser_id(int user_id) {
-		this.user_id = user_id;
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
-	public Date getCreated_at() {
-		return created_at;
+	public Date getCreatedAt() {
+		return createdAt;
 	}
-	public void setCreated_at(Date created_at) {
-		this.created_at = created_at;
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
 	}
-	public Date getUpdated_at() {
-		return updated_at;
+	public Date getUpdatedAt() {
+		return updatedAt;
 	}
-	public void setUpdated_at(Date updated_at) {
-		this.updated_at = updated_at;
+	public void setUpdatedAt(Date updatedAt) {
+		this.updatedAt = updatedAt;
 	}
-
-
-
-
-
-
 }

@@ -50,25 +50,25 @@ public class UserDao {
 		try {
 			while (rs.next()) {
 				int id = rs.getInt("id");
-				String login_id = rs.getString("login_id");
+				String loginId = rs.getString("login_id");
 				String password = rs.getString("password");
 				String name = rs.getString("name");
-				int	   branch_id = rs.getInt("branch_id");
-				int    job_id = rs.getInt("job_id");
-				int    is_stopped = rs.getInt("is_stopped");
-				Timestamp created_at = rs.getTimestamp("created_at");
-				Timestamp updated_at = rs.getTimestamp("updated_at");
+				int	   branchId = rs.getInt("branch_id");
+				int    jobId = rs.getInt("job_id");
+				int    isStopped = rs.getInt("is_stopped");
+				Timestamp createdAt = rs.getTimestamp("created_at");
+				Timestamp updatedAt = rs.getTimestamp("updated_at");
 
 				User users = new User();
 				users.setId(id);
-				users.setLoginId(login_id);
+				users.setLoginId(loginId);
 				users.setPassword(password);
 				users.setName(name);
-				users.setBranchId(branch_id);
-				users.setJobId(job_id);
-				users.setIsStopped(is_stopped);
-				users.setCreatedAt(created_at);
-				users.setUpdateDate(updated_at);
+				users.setBranchId(branchId);
+				users.setJobId(jobId);
+				users.setIsStopped(isStopped);
+				users.setCreatedAt(createdAt);
+				users.setUpdateDate(updatedAt);
 
 				ret.add(users);
 			}
@@ -205,7 +205,7 @@ public class UserDao {
 		}
 	}
 
-	public void isStopped(Connection connection, int id, int is_stopped) {
+	public void isStopped(Connection connection, int id, int isStopped) {
 
 		PreparedStatement ps = null;
 		try {
@@ -217,7 +217,7 @@ public class UserDao {
 
 			ps = connection.prepareStatement(sql.toString());
 
-			ps.setInt(1, is_stopped);
+			ps.setInt(1, isStopped);
 			ps.setInt(2, id);
 
 			int count = ps.executeUpdate();

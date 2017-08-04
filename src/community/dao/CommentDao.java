@@ -36,11 +36,50 @@ public class CommentDao {
 
 			ps = connection.prepareStatement(sql.toString());
 
-			ps.setInt   (1, comments.getMessage_id());
+			ps.setInt   (1, comments.getMessageId());
 			ps.setString(2, comments.getText());
-			ps.setInt	(3, comments.getBranch_id());
-			ps.setInt	(4, comments.getJob_id());
-			ps.setInt	(5, comments.getUser_id());
+			ps.setInt	(3, comments.getBranchId());
+			ps.setInt	(4, comments.getJobId());
+			ps.setInt	(5, comments.getUserId());
+
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			throw new SQLRuntimeException(e);
+		} finally {
+			close(ps);
+		}
+	}
+
+	public void delete(Connection connection, Comment comments) {
+
+		PreparedStatement ps = null;
+		try {
+			StringBuilder sql = new StringBuilder();
+			sql.append("DELETE INTO  Comments ( ");
+			sql.append("message_id");
+			sql.append(", text");
+			sql.append(", branch_id");
+			sql.append(", job_id");
+			sql.append(", user_id");
+			sql.append(", created_at");
+			sql.append(", updated_at");
+			sql.append(") VALUES (");
+			sql.append("?"); // message_id
+			sql.append(", ?"); // text
+			sql.append(", ?"); // branch_id
+			sql.append(", ?"); // job_id
+			sql.append(", ?"); // user_id
+			sql.append(", CURRENT_TIMESTAMP"); // created_at
+			sql.append(", CURRENT_TIMESTAMP"); // updated_at
+			sql.append(")");
+
+			ps = connection.prepareStatement(sql.toString());
+
+			ps.setInt   (1, comments.getMessageId());
+			ps.setString(2, comments.getText());
+			ps.setInt	(3, comments.getBranchId());
+			ps.setInt	(4, comments.getJobId());
+			ps.setInt	(5, comments.getUserId());
 
 			ps.executeUpdate();
 		} catch (SQLException e) {

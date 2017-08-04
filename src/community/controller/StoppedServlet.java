@@ -20,8 +20,8 @@ public class StoppedServlet extends HttpServlet {
 			HttpServletResponse response) throws IOException, ServletException {
 
 		int id = Integer.parseInt(request.getParameter("id"));
-		int is_stopped = Integer.parseInt(request.getParameter("is_stopped"));
-		new UserService().isStopped(id,is_stopped);
+		int isStopped = Integer.parseInt(request.getParameter("isStopped"));
+		new UserService().isStopped(id,isStopped);
 
 		response.sendRedirect("status");
 

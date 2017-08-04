@@ -36,11 +36,11 @@ public class SignUpServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 
 		User users = new User();
-		users.setLoginId(request.getParameter("login_id"));
+		users.setLoginId(request.getParameter("loginId"));
 		users.setPassword(request.getParameter("password"));
 		users.setName(request.getParameter("name"));
-		users.setBranchId(Integer.parseInt(request.getParameter("branch_id")));
-		users.setJobId(Integer.parseInt(request.getParameter("job_id")));
+		users.setBranchId(Integer.parseInt(request.getParameter("branchId")));
+		users.setJobId(Integer.parseInt(request.getParameter("jobId")));
 		users.setIsStopped(0);
 
 		if (isValid(request, messages) == true) {
@@ -57,7 +57,7 @@ public class SignUpServlet extends HttpServlet {
 	}
 
 	private boolean isValid(HttpServletRequest request, List<String> messages) {
-		String login_id = request.getParameter("login_id");
+		String login_id = request.getParameter("loginId");
 		String password = request.getParameter("password");
 
 		if (StringUtils.isEmpty(login_id) == true) {

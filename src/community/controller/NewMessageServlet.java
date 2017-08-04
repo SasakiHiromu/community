@@ -42,9 +42,9 @@ public class NewMessageServlet extends HttpServlet {
 			message.setTitle(request.getParameter("title"));
 			message.setCategory(request.getParameter("category"));
 			message.setText(request.getParameter("text"));
-			message.setBranch_id(users.getBranchId());
-			message.setJob_id(users.getJobId());
-			message.setUser_id(users.getId());
+			message.setBranchId(users.getBranchId());
+			message.setJobId(users.getJobId());
+			message.setUserId(users.getId());
 
 			new MessageService().register(message);
 

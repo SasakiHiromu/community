@@ -23,8 +23,8 @@
 </c:if>
 
 <form action="settings" method="post"><br />
-	<label for="login_id">ID</label>
-	<input name="login_id" value="${editUser.login_id}"/> <br />
+	<label for="loginId">ID</label>
+	<input name="loginId" value="${editUser.loginId}"/> <br />
 
 	<label for="password">パスワード</label>
 	<input name="password" type="password" /> <br />
@@ -32,7 +32,7 @@
 	<label for="name">名前</label>
 	<input name="name" value="${editUser.name}"/> <br />
 
-	<label for="branch_id">支店名</label>
+	<label for="branchId">支店名</label>
 	<c:forEach items="${allbranches}" var="allbranche">
 		<c:if test="${editUser.id == allbranche.id}">
 	<input name="branch_id" value="${allbranche.name}"/> <br />

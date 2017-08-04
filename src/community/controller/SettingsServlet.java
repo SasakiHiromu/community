@@ -82,21 +82,21 @@ public class SettingsServlet extends HttpServlet {
 		UserService userservice = new UserService();
 		User editUser = userservice.getUser(Integer.parseInt(request.getParameter("id")));
 
-		editUser.setLoginId(request.getParameter("login_id"));
+		editUser.setLoginId(request.getParameter("loginId"));
 		editUser.setPassword(request.getParameter("password"));
 		editUser.setName(request.getParameter("name"));
-		editUser.setBranchId(Integer.parseInt(request.getParameter("branch_id")));
-		editUser.setJobId(Integer.parseInt(request.getParameter("job_id")));
+		editUser.setBranchId(Integer.parseInt(request.getParameter("branchId")));
+		editUser.setJobId(Integer.parseInt(request.getParameter("jobId")));
 		return editUser;
 	}
 
 
 	private boolean isValid(HttpServletRequest request, List<String> messages) {
 
-		String login_id = request.getParameter("login_id");
+		String loginId = request.getParameter("loginId");
 		String password = request.getParameter("password");
 
-		if (StringUtils.isEmpty(login_id) == true) {
+		if (StringUtils.isEmpty(loginId) == true) {
 			messages.add("アカウント名を入力してください");
 		}
 		if (StringUtils.isEmpty(password) == true) {

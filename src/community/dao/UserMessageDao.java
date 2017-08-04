@@ -46,7 +46,7 @@ public class UserMessageDao {
 				String title = rs.getString("title");
 				String category = rs.getString("category");
 				String text = rs.getString("text");
-				Timestamp created_at = rs.getTimestamp("created_at");
+				Timestamp createdAt = rs.getTimestamp("created_at");
 
 				UserMessage message = new UserMessage();
 				message.setName(name);
@@ -54,7 +54,7 @@ public class UserMessageDao {
 				message.setTitle(title);
 				message.setCategory(category);
 				message.setText(text);
-				message.setCreated_at(created_at);
+				message.setCreatedAt(createdAt);
 
 				ret.add(message);
 			}

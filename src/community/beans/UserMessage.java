@@ -11,10 +11,9 @@ public class UserMessage implements Serializable {
 	private String title;
 	private String category;
 	private String text;
-	private int branch_id;
-	private int job_id;
-	private Date created_at;
-
+	private int branchId;
+	private int jobId;
+	private Date createdAt;
 
 	public int getId() {
 		return id;
@@ -46,27 +45,22 @@ public class UserMessage implements Serializable {
 	public void setText(String text) {
 		this.text = text;
 	}
-	public int getBranch_id() {
-		return branch_id;
+	public int getBranchId() {
+		return branchId;
 	}
-	public void setBranch_id(int branch_id) {
-		this.branch_id = branch_id;
+	public void setBranchId(int branchId) {
+		this.branchId = branchId;
 	}
-	public int getJob_id() {
-		return job_id;
+	public int getJobId() {
+		return jobId;
 	}
-	public void setJob_id(int job_id) {
-		this.job_id = job_id;
+	public void setJobId(int jobId) {
+		this.jobId = jobId;
 	}
-	public Date getCreated_at() {
-		return created_at;
+	public Date getCreatedAt() {
+		return createdAt;
 	}
-	public void setCreated_at(Date created_at) {
-		this.created_at = created_at;
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
 	}
-
-
-
-
-
 }

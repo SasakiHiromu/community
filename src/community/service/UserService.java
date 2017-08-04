@@ -109,14 +109,14 @@ public class UserService {
 		}
 	}
 
-	public void isStopped(int id, int is_stopped) {
+	public void isStopped(int id, int isStopped) {
 
 		Connection connection = null;
 		try {
 			connection = getConnection();
 
 			UserDao userDao = new UserDao();
-			userDao.isStopped(connection, id, is_stopped);
+			userDao.isStopped(connection, id, isStopped);
 
 			commit(connection);
 		} catch (RuntimeException e) {

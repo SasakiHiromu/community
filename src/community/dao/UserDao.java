@@ -17,15 +17,16 @@ import community.exception.SQLRuntimeException;
 
 public class UserDao {
 
-	public User getUser(Connection connection, String login_id, String password) {
+	public User getUser(Connection connection, String loginId, String password) {
 
 		PreparedStatement ps = null;
 		try {
-			String sql = "SELECT * FROM users WHERE (login_id = ?) AND password = ?";
+			String sql = "SELECT * FROM users WHERE login_id = ? AND password = ? AND is_stopped = 0";
 
 			ps = connection.prepareStatement(sql);
-			ps.setString(1, login_id);
+			ps.setString(1, loginId);
 			ps.setString(2, password);
+
 
 			ResultSet rs = ps.executeQuery();
 			List<User> userList = toUserList(rs);

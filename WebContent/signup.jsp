@@ -31,11 +31,24 @@
 	<label for="name">名前</label>
 	<input name="name"  id="name"/> <br />
 
-	<label for="branchId">支店名</label>
-	<input name="branchId" id="branchId"/> <br />
+	<label for="branchId">所属名</label>
 
-	<label for="jobId">役職</label>
-	<input name="jobId"id="jobId"></input> <br />
+	<select>
+		<option selected>所属</option>
+		<c:forEach items="${allbranches}" var="allbranche">
+			<option value="${allbranche.id}">${allbranche.name}</option>
+		</c:forEach>
+	</select><br />
+
+
+	<label for="branchId">役職名</label>
+
+	<select>
+		<option selected>役職</option>
+			<c:forEach items="${alljobs}" var="alljob">
+				<option value="${alljob.id}">${alljob.name}</option>
+			</c:forEach>
+	</select><br />
 
 	<input type="submit" value="登録" /> <br />
 	<a href="./">戻る</a>

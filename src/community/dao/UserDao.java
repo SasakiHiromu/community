@@ -192,7 +192,7 @@ public class UserDao {
 		PreparedStatement ps = null;
 		try {
 			StringBuilder sql = new StringBuilder();
-			sql.append("SELECT * FROM users ");
+			sql.append("SELECT * FROM users");
 
 			ps = connection.prepareStatement(sql.toString());
 			ResultSet rs = ps.executeQuery();

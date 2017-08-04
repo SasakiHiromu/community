@@ -13,7 +13,11 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
 
+import community.beans.Branch;
+import community.beans.Job;
 import community.beans.User;
+import community.service.BranchService;
+import community.service.JobService;
 import community.service.UserService;
 
 @WebServlet(urlPatterns = { "/signup" })
@@ -23,6 +27,13 @@ public class SignUpServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws IOException, ServletException {
+
+
+		List<Branch> getAllBranch = new BranchService().getAllBranch();
+		request.setAttribute("allbranches", getAllBranch);
+
+		List<Job> getAllJob = new JobService().getAllJob();
+		request.setAttribute("alljobs", getAllJob);
 
 		request.getRequestDispatcher("signup.jsp").forward(request, response);
 	}

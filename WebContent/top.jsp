@@ -34,7 +34,7 @@
 	本文<div class="text"><c:out value="${message.text}" /></div>
 	投稿日時<div class="date"><fmt:formatDate value="${message.createdAt}"
 	pattern="yyyy/MM/dd HH:mm:ss" /></div>
-	<form action="commentDelete" method="post"><br />
+	<form action="Delete" method="post"><br />
 		<button type="submit" name="message_id" value="${message.id}">削除</button>
 	</form>
 	</div>
@@ -53,7 +53,7 @@
 					</c:if>
 				</c:forEach>
 			</c:if>
-			<form action="commentDelete" method="post"><br />
+			<form action="Delete" method="post"><br />
 				<button type="submit" name="comment_id" value="${comment.id}">削除</button>
 			</form>
 		</c:forEach>

@@ -32,19 +32,25 @@
 	<label for="name">名前</label>
 	<input name="name" value="${editUser.name}"/> <br />
 
-	<label for="branchId">支店名</label>
-	<c:forEach items="${allbranches}" var="allbranche">
-		<c:if test="${editUser.id == allbranche.id}">
-	<input name="branch_id" value="${allbranche.name}"/> <br />
-		</c:if>
-	</c:forEach>
+	<label for="branchId">所属名</label>
 
-	<label for="job_id">役職</label>
-	<c:forEach items="${alljobs}" var="alljob">
-		<c:if test="${editUser.id == alljob.id}">
-	<input name="branch_id" value="${alljob.name}"/> <br />
-		</c:if>
-	</c:forEach>
+	<select name="branchId">
+		<option selected>所属</option>
+		<c:forEach items="${allbranches}" var="allbranche">
+			<option value="${allbranche.id}">${allbranche.name}</option>
+		</c:forEach>
+	</select><br />
+
+
+	<label for="jobId">役職名</label>
+
+	<select name="jobId">
+		<option selected>役職</option>
+			<c:forEach items="${alljobs}" var="alljob">
+				<option value="${alljob.id}">${alljob.name}</option>
+			</c:forEach>
+	</select><br />
+
 
 	<button type="submit"  name="id" value="${editUser.id}">登録</button><br />
 	<a href="status">ユーザー管理画面に戻る</a>

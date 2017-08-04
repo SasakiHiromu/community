@@ -34,7 +34,7 @@ public class NewCommentServlet extends HttpServlet {
 			User users = (User) session.getAttribute("loginUser");
 
 			Comment comment = new Comment();
-			comment.setMessageId(Integer.parseInt(request.getParameter("messageId")));
+			comment.setMessageId(Integer.parseInt(request.getParameter("message_id")));
 			comment.setText(request.getParameter("text"));
 			comment.setBranchId(users.getBranchId());
 			comment.setJobId(users.getJobId());

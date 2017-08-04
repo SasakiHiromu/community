@@ -26,14 +26,16 @@
 		<tr>
 			<td>${alluser.loginId}</td>
 			<td>${alluser.name}</td>
-				<c:forEach items="${allbranches}" var="allbranches">
-					<c:if test="${alluser.id == allbranches.id}">
-						<td>${allbranches.name}</td>
+
+				<c:forEach items="${allbranches}" var="allbranch">
+					<c:if test="${alluser.branchId == allbranch.id}">
+						<td><c:out value="${allbranch.name}"></c:out></td>
 					</c:if>
 				</c:forEach>
-				<c:forEach items="${alljobs}" var="alljobs">
-					<c:if test="${alluser.id == alljobs.id}">
-						<td>${alljobs.name}</td>
+
+				<c:forEach items="${alljobs}" var="alljob">
+					<c:if test="${alluser.jobId == alljob.id}">
+						<td><c:out value="${alljob.name}"></c:out></td>
 					</c:if>
 				</c:forEach>
 			<td>

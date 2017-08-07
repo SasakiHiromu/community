@@ -52,16 +52,16 @@ public class User implements Serializable {
 		return branchId;
 	}
 
-	public void setBranchId(int branch_id) {
-		this.branchId = branch_id;
+	public void setBranchId(int branchId) {
+		this.branchId = branchId;
 	}
 
 	public int getJobId() {
 		return jobId;
 	}
 
-	public void setJobId(int job_id) {
-		this.jobId = job_id;
+	public void setJobId(int jobId) {
+		this.jobId = jobId;
 	}
 
 	public int getIsStopped() {

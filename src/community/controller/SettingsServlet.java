@@ -31,8 +31,11 @@ public class SettingsServlet extends HttpServlet {
 
 		HttpSession session = request.getSession();
 		UserService userservice = new UserService();
-		User editUser = userservice.getUser(Integer.parseInt(request.getParameter("id")));
-		session.setAttribute("editUser", editUser);
+
+		if(session.getAttribute("editUser") == null) {
+			User editUser = userservice.getUser(Integer.parseInt(request.getParameter("id")));
+			session.setAttribute("editUser", editUser);
+		}
 
 		List<Branch> getAllBranch = new BranchService().getAllBranch();
 		request.setAttribute("allbranches", getAllBranch);
@@ -95,6 +98,7 @@ public class SettingsServlet extends HttpServlet {
 
 		String loginId = request.getParameter("loginId");
 		String password = request.getParameter("password");
+		String newPassword = request.getParameter("newPassword");
 
 		if (StringUtils.isEmpty(loginId) == true) {
 			messages.add("アカウント名を入力してください");
@@ -102,6 +106,16 @@ public class SettingsServlet extends HttpServlet {
 		if (StringUtils.isEmpty(password) == true) {
 			messages.add("パスワードを入力してください");
 		}
+		if (StringUtils.isEmpty(newPassword) == true) {
+			messages.add("確認用パスワードを入力してください");
+		}
+		if (StringUtils.isBlank(password) != true && StringUtils.isBlank(newPassword) != true) {
+			System.out.println(password+newPassword);
+			if (password != newPassword) {
+				messages.add("パスワードが一致しません");
+			}
+		}
+
 		// TODO アカウントが既に利用されていないか、メールアドレスが既に登録されていないかなどの確認も必要
 		if (messages.size() == 0) {
 			return true;
@@ -111,5 +125,3 @@ public class SettingsServlet extends HttpServlet {
 	}
 
 }
-
-

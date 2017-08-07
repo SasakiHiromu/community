@@ -11,6 +11,7 @@
 </head>
 <body>
 <h3>わったいな掲示板</h3>
+<c:out value="${loginUser.name}でログイン中です"></c:out>
 <div class="main-contents">
 
 <a href="newMessage">新規投稿</a>
@@ -20,6 +21,7 @@
 <a href="logout">ログアウト</a>
 
 <div class="header"></div>
+
 </div>
 </body>
 <div class="messages">

@@ -29,6 +29,9 @@
 	<label for="password">パスワード</label>
 	<input name="password" type="password" /> <br />
 
+	<label for="password">パスワード(確認用)</label>
+	<input name="newPassword" type="password" /> <br />
+
 	<label for="name">名前</label>
 	<input name="name" value="${editUser.name}"/> <br />
 

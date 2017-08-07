@@ -5,7 +5,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-	<link href="./css/style.css" rel="stylesheet" type="text/css">
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>ユーザー登録</title>
 </head>
@@ -33,7 +32,7 @@
 
 	<label for="branchId">所属名</label>
 
-	<select>
+	<select name="branchId">
 		<option selected>所属</option>
 		<c:forEach items="${allbranches}" var="allbranche">
 			<option value="${allbranche.id}">${allbranche.name}</option>
@@ -43,7 +42,7 @@
 
 	<label for="branchId">役職名</label>
 
-	<select>
+	<select name="jobId">
 		<option selected>役職</option>
 			<c:forEach items="${alljobs}" var="alljob">
 				<option value="${alljob.id}">${alljob.name}</option>
@@ -51,7 +50,7 @@
 	</select><br />
 
 	<input type="submit" value="登録" /> <br />
-	<a href="./">戻る</a>
+	<a href="status">戻る</a>
 </form>
 </div>
 </body>

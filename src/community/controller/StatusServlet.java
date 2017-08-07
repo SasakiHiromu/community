@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import community.beans.Branch;
 import community.beans.Job;
@@ -23,6 +24,8 @@ public class StatusServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws IOException, ServletException {
+		HttpSession session = request.getSession();
+		session.removeAttribute("editUser");
 
 		List<User> getAllUser = new UserService().getAllUser();
 		request.setAttribute("allusers", getAllUser);
@@ -32,15 +35,15 @@ public class StatusServlet extends HttpServlet {
 
 		List<Job> getAllJob = new JobService().getAllJob();
 		request.setAttribute("alljobs", getAllJob);
-		
-		
+
+
 		request.getRequestDispatcher("status.jsp").forward(request, response);
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws IOException, ServletException {
-		
+
 	}
 
 }

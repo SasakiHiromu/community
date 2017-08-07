@@ -41,7 +41,6 @@
 			<td>
 				<form action="settings" method="get">
 					<button type="submit"  name="id" value="${alluser.id}">編集</button>
-
 				</form>
 			</td>
 			<td>

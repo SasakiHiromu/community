@@ -10,13 +10,15 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
+
 import community.beans.UserMessage;
 import community.exception.SQLRuntimeException;
 
 public class UserMessageDao {
 
 	public List<UserMessage> getUserMessages(Connection connection,
-			String startDate, String endDate) {
+			String startDate, String endDate, String category) {
 
 		PreparedStatement ps = null;
 		try {
@@ -26,11 +28,20 @@ public class UserMessageDao {
 			sql.append("created_at >= ?");
 			sql.append(" AND ");
 			sql.append("created_at <= ?");
-			sql.append(" ORDER BY created_at DESC");
+
+			if (StringUtils.isBlank(category) == false) {
+				sql.append(" AND ");
+				sql.append("category = ?");
+			}
+			sql.append("ORDER BY created_at DESC");
 
 			ps = connection.prepareStatement(sql.toString());
 			ps.setString(1, startDate);
 			ps.setString(2, endDate);
+
+			if (StringUtils.isBlank(category) == false) {
+				ps.setString(3, category);
+			}
 
 			ResultSet rs = ps.executeQuery();
 			List<UserMessage> ret = toUserMessageList(rs);

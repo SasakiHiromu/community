@@ -3,9 +3,10 @@
 <%@page isELIgnored= "false"%>
 <%@page import="java.util.*" %>
 <%@page import="java.text.*" %>
+<%@ page import="java.util.Date, java.text.DateFormat" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -28,16 +29,25 @@
 </body>
 <div class="messages">
 <form action="./"><br />
-<input name="startDate">
-<input name="endDate">
-<input type="submit" value="絞り込む">
+<select name="categorys">
+	<option selected>カテゴリー</option>
+	<c:forEach items="${categorys}" var="category">
+		<option value="${message.category}">category</option>
+	</c:forEach>
+</select>
+	<input type="date" name="startDate" min="2017-07-31" max="${diaryDate}">
+	<input type="date" name="endDate" min="2017-07-31" max="${diaryDate}">
+	<button type="submit" value="${message.category}">絞込み</button>
 </form>
+
+
+
 <c:forEach items="${messages}" var="message">
 	<div class="message">
 		<div class="account-name">
 			名前：<span class="name"><c:out value="${message.name}" /></span><br />
 			タイトル：<span class="title"><c:out value="${message.title}" /></span><br />
-			件名:<span class="category"><c:out value="${message.category}" /></span><br />
+			カテゴリー:<span class="category"><c:out value="${message.category}" /></span><br />
 			<p></p>
 		</div>
 	本文<div class="text"><c:out value="${message.text}" /></div>

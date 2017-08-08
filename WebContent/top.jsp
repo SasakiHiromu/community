@@ -32,7 +32,7 @@
 <select name="categorys">
 	<option selected>カテゴリー</option>
 	<c:forEach items="${categorys}" var="category">
-		<option value="${message.category}">category</option>
+		<option value="${category}"><c:out value="${category}"></c:out></option>
 	</c:forEach>
 </select>
 	<input type="date" name="startDate" min="2017-07-31" max="${diaryDate}">

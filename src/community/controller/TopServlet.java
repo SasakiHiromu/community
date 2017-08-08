@@ -54,7 +54,9 @@ public class TopServlet extends HttpServlet {
 		for (int i = 0; i >= categoryList.size(); i++) {
 			 categorys.add(categoryList.get(i).getCategory());
 		}
+		System.out.println(categoryList.size());
 		request.setAttribute("categorys", categorys);
+		System.out.println(categoryList.get(0).getCategory());
 
 
 		if (request.getParameter("startDate") != null) {
@@ -66,7 +68,6 @@ public class TopServlet extends HttpServlet {
 		}
 
 		category = request.getParameter("categorys");
-		System.out.println(category);
 
 		List<UserMessage> messageList = new MessageService().getMessage(startDate,endDate,category);
 		request.setAttribute("messages", messageList);

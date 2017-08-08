@@ -1,6 +1,8 @@
 package community.controller;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -36,9 +38,22 @@ public class TopServlet extends HttpServlet {
 		List<Job> getAllJob = new JobService().getAllJob();
 		request.setAttribute("alljobs", getAllJob);
 
+		Date date = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		String startDate = "2017/7/31 00:00:00";
+		String endDate = sdf.format(date).toString();
 
-		List<UserMessage> messageList = new MessageService().getMessage();
+		if (request.getParameter("startDate") != null) {
+			startDate = request.getParameter("startDate") + " 00:00:00";
+		}
+
+		if (request.getParameter("endDate") != null) {
+			endDate = request.getParameter("endDate") + " 23:59:00";
+		}
+
+		List<UserMessage> messageList = new MessageService().getMessage(startDate,endDate);
 		request.setAttribute("messages", messageList);
+
 
 		List<UserComment> commentList = new CommentService().getComment();
 		request.setAttribute("comments", commentList);

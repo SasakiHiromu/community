@@ -15,15 +15,22 @@ import community.exception.SQLRuntimeException;
 
 public class UserMessageDao {
 
-	public List<UserMessage> getUserMessages(Connection connection) {
+	public List<UserMessage> getUserMessages(Connection connection,
+			String startDate, String endDate) {
 
 		PreparedStatement ps = null;
 		try {
 			StringBuilder sql = new StringBuilder();
-			sql.append("SELECT * FROM talk_board.message ");
-			sql.append("ORDER BY created_at DESC");
+			sql.append("SELECT * FROM talk_board.message");
+			sql.append(" WHERE ");
+			sql.append("created_at >= ?");
+			sql.append(" AND ");
+			sql.append("created_at <= ?");
+			sql.append(" ORDER BY created_at DESC");
 
 			ps = connection.prepareStatement(sql.toString());
+			ps.setString(1, startDate);
+			ps.setString(2, endDate);
 
 			ResultSet rs = ps.executeQuery();
 			List<UserMessage> ret = toUserMessageList(rs);

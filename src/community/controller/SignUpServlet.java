@@ -70,6 +70,8 @@ public class SignUpServlet extends HttpServlet {
 	private boolean isValid(HttpServletRequest request, List<String> messages) {
 		String login_id = request.getParameter("loginId");
 		String password = request.getParameter("password");
+		String newPassword = request.getParameter("newPassword");
+
 
 		if (StringUtils.isEmpty(login_id) == true) {
 			messages.add("IDを入力してください");
@@ -77,6 +79,14 @@ public class SignUpServlet extends HttpServlet {
 		if (StringUtils.isEmpty(password) == true) {
 			messages.add("パスワードを入力してください");
 		}
+
+		if (StringUtils.isBlank(password) != true && StringUtils.isBlank(newPassword) != true) {
+			System.out.println(password+newPassword);
+			if (!(password.contentEquals(newPassword))) {
+				messages.add("パスワードが一致しません");
+			}
+		}
+
 		// TODO アカウントが既に利用されていないか、メールアドレスが既に登録されていないかなどの確認も必要
 		if (messages.size() == 0) {
 			return true;

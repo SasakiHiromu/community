@@ -9,7 +9,7 @@
 	<title>ログイン</title>
 </head>
 <body>
-
+<h3>○○社INFORMATION　ログインページ</h3>
 <c:if test="${ not empty errorMessages }">
 	<div class="errorMessages">
 		<ul>

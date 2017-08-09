@@ -12,14 +12,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.StringUtils;
+
 import community.beans.Branch;
 import community.beans.Job;
+import community.beans.User;
 import community.beans.UserComment;
 import community.beans.UserMessage;
 import community.service.BranchService;
 import community.service.CommentService;
 import community.service.JobService;
 import community.service.MessageService;
+import community.service.UserService;
 
 /**
  * Servlet implementation class TopServlet
@@ -34,6 +38,9 @@ public class TopServlet extends HttpServlet {
 
 		String category = null;
 
+
+		List<User> getAllUser = new UserService().getAllUser();
+		request.setAttribute("allusers", getAllUser);
 
 		List<Branch> getAllBranch = new BranchService().getAllBranch();
 		request.setAttribute("allbranches", getAllBranch);
@@ -50,28 +57,27 @@ public class TopServlet extends HttpServlet {
 		request.setAttribute("diaryDate", diaryDate);
 
 		List<UserMessage> categoryList = new MessageService().getMessage(startDate,endDate,category);
-		List<String> categorys = new ArrayList<String>();
-		for (int i = 0; i >= categoryList.size(); i++) {
-			 categorys.add(categoryList.get(i).getCategory());
+		List<String> categories = new ArrayList<String>();
+		for (int i = 0; i < categoryList.size(); i++) {
+			 categories.add(categoryList.get(i).getCategory());
 		}
-		System.out.println(categoryList.size());
-		request.setAttribute("categorys", categorys);
-		System.out.println(categoryList.get(0).getCategory());
+		request.setAttribute("categories", categories);
 
-
-		if (request.getParameter("startDate") != null) {
-			startDate = request.getParameter("startDate") + " 00:00:00";
+		if (StringUtils.isBlank(request.getParameter("startDate")) == false) {
+			startDate = request.getParameter("startDate");
 		}
 
-		if (request.getParameter("endDate") != null) {
-			endDate = request.getParameter("endDate") + " 23:59:00";
+		if (StringUtils.isBlank(request.getParameter("endDate")) == false) {
+			endDate = request.getParameter("endDate");
 		}
 
-		category = request.getParameter("categorys");
+		if (request.getParameter("categories") != null) {
+			category = request.getParameter("categories");
+		}
 
 		List<UserMessage> messageList = new MessageService().getMessage(startDate,endDate,category);
 		request.setAttribute("messages", messageList);
-		request.setAttribute("category", category);
+
 
 		List<UserComment> commentList = new CommentService().getComment();
 		request.setAttribute("comments", commentList);

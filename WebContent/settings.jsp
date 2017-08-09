@@ -7,6 +7,24 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>ユーザー編集</title>
+<script type="text/javascript">
+
+function check(){
+
+	if(window.confirm('以上の内容で登録してよろしいですか？')){ // 確認ダイアログを表示
+
+		return true; // 「OK」時は送信を実行
+
+	}
+	else{ // 「キャンセル」時の処理
+
+		return false; // 送信を中止
+
+	}
+
+}
+
+</script>
 </head>
 <body>
 <div class="main-contents">
@@ -22,7 +40,7 @@
 	<c:remove var="errorMessages" scope="session"/>
 </c:if>
 
-<form action="settings" method="post"><br />
+<form action="settings" method="post" onSubmit="return check()"><br />
 	<label for="loginId">ID</label>
 	<input name="loginId" value="${editUser.loginId}"/> <br />
 

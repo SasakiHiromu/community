@@ -13,8 +13,15 @@ public class UserMessage implements Serializable {
 	private String text;
 	private int branchId;
 	private int jobId;
+	private int userId;
 	private Date createdAt;
 
+	public int getUserId() {
+		return userId;
+	}
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
 	public int getId() {
 		return id;
 	}

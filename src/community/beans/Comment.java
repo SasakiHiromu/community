@@ -14,6 +14,7 @@ public class Comment implements Serializable {
 	private int userId;
 	private Date createdAt;
 	private Date updatedAt;
+
 	public int getId() {
 		return id;
 	}

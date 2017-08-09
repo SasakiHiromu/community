@@ -7,12 +7,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>ユーザー管理</title>
+<title>社員アカウント管理</title>
 </head>
 <body>
-<h3>ユーザー管理</h3>
-<a href="signup">新規登録</a>
-
+<h3>社員アカウント管理</h3>
+<a href="signup">入社登録</a>
 <table>
 	<tr>
 		<th>id</th>
@@ -20,8 +19,6 @@
 		<th>所属</th>
 		<th>役職</th>
 	</tr>
-
-
 	<c:forEach items="${allusers}" var="alluser">
 		<tr>
 			<td>${alluser.loginId}</td>
@@ -48,12 +45,12 @@
 					<input type="hidden" name="id" value="${alluser.id}">
 					<c:if test="${alluser.isStopped == 0}">
 						<input type="hidden" name="isStopped" value=1>
-						<button type="submit">停止</button>
+						<button type="submit">停止可能</button>
 					</c:if>
 
 					<c:if test="${alluser.isStopped == 1}">
 						<input type="hidden" name="isStopped" value=0>
-						<button type="submit">復活</button>
+						<button type="submit">停止解除</button>
 					</c:if>
 				</form>
 			</td>
@@ -61,6 +58,6 @@
 		<br />
 	</c:forEach>
 </table>
-<a href="./">トップへ戻る</a>
+<a href="./">INFORMATIONへ戻る</a>
 </body>
 </html>

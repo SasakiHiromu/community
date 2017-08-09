@@ -10,16 +10,38 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>わったいな掲示板</title>
+	<title>○○社INFORMATION</title>
+
+<script type="text/javascript">
+
+function check(){
+
+	if(window.confirm('削除してよろしいですか？')){ // 確認ダイアログを表示
+
+		return true; // 「OK」時は送信を実行
+
+	}
+	else{ // 「キャンセル」時の処理
+
+		return false; // 送信を中止
+
+	}
+
+}
+
+</script>
+
 </head>
 <body>
-<h3>わったいな掲示板</h3>
+<h3>○○社INFORMATION</h3>
 <c:out value="${loginUser.name}でログイン中です"></c:out>
 <div class="main-contents">
 
-<a href="newMessage">新規投稿</a>
+<a href="newMessage">新規投稿入力ページ</a>
 
-<a href="status">ユーザー管理</a>
+<c:if test="${loginUser.jobId == 1}" >
+	<a href="status">社員アカウント管理ページ</a>
+</c:if>
 
 <a href="logout">ログアウト</a>
 
@@ -29,15 +51,17 @@
 </body>
 <div class="messages">
 <form action="./"><br />
-<select name="categorys">
-	<option selected>カテゴリー</option>
-	<c:forEach items="${categorys}" var="category">
+カテゴリー指定
+<select name="categories">
+	<option value="" selected>カテゴリーを選ぶ</option>
+	<c:forEach items="${categories}" var="category">
 		<option value="${category}"><c:out value="${category}"></c:out></option>
 	</c:forEach>
 </select>
+日付指定
 	<input type="date" name="startDate" min="2017-07-31" max="${diaryDate}">
 	<input type="date" name="endDate" min="2017-07-31" max="${diaryDate}">
-	<button type="submit" value="${message.category}">絞込み</button>
+	<button type="submit">絞込み</button>
 </form>
 
 
@@ -53,28 +77,68 @@
 	本文<div class="text"><c:out value="${message.text}" /></div>
 	投稿日時<div class="date"><fmt:formatDate value="${message.createdAt}"
 	pattern="yyyy/MM/dd HH:mm:ss" /></div>
-	<form action="Delete" method="post"><br />
-		<button type="submit" name="message_id" value="${message.id}">削除</button>
-	</form>
+
+	<c:choose>
+		<c:when test="${loginUser.jobId == 2}">
+			<form action="Delete" method="post" onSubmit="return check()"><br />
+				<button type="submit" name="message_id" value="${message.id}">削除</button>
+			</form>
+		</c:when>
+		<c:when test="${loginUser.id == message.userId}">
+			<form action="Delete" method="post" onSubmit="return check()"><br />
+				<button type="submit" name="message_id" value="${message.id}">削除</button>
+			</form>
+		</c:when>
+		<c:when test="${loginUser.branchId == message.branchId && loginUser.jobID == 3}">
+			<form action="Delete" method="post" onSubmit="return check()"><br />
+				<button type="submit" name="message_id" value="${message.id}">削除</button>
+			</form>
+		</c:when>
+	</c:choose>
+
 	</div>
 
 		<c:forEach items="${comments}" var="comment">
 			<c:if test="${message.id == comment.messageId}" >
-				<span class="text"><c:out value="${comment.text}" /></span><br />
-				<c:forEach items="${allbranches}" var="allbranche">
-					<c:if test="${comment.branchId == allbranche.id}">
-						<span class="branch_id"><c:out value="${allbranche.name}" /></span><br />
-					</c:if>
-				</c:forEach>
-				<c:forEach items="${alljobs}" var="alljob">
-					<c:if test="${comment.jobId == alljob.id}">
-						<span class="job_id"><c:out value="${alljob.name}" /></span>
-					</c:if>
-				</c:forEach>
+				<c:out value="${comment.text}" /><br />
+
+					<c:forEach items="${allusers}" var="alluser">
+						<c:if test="${alluser.id == comment.userId}">
+							コメント記入者:<c:out value="${alluser.name}" /><br />
+						</c:if>
+					</c:forEach>
+
+					<c:forEach items="${allbranches}" var="allbranche">
+						<c:if test="${comment.branchId == allbranche.id}">
+							所属:<c:out value="${allbranche.name}" /><br />
+						</c:if>
+					</c:forEach>
+
+					<c:forEach items="${alljobs}" var="alljob">
+						<c:if test="${comment.jobId == alljob.id}">
+							役職:<c:out value="${alljob.name}" /><br />
+						</c:if>
+					</c:forEach>
+
+
+				<c:choose>
+					<c:when test="${loginUser.jobId == 2}">
+						<form action="Delete" method="post" onSubmit="return check()"><br />
+							<button type="submit" name="comment_id" value="${comment.id}">削除</button>
+						</form>
+					</c:when>
+					<c:when test="${loginUser.id == comment.userId}">
+						<form action="Delete" method="post" onSubmit="return check()"><br />
+							<button type="submit" name="comment_id" value="${comment.id}">削除</button>
+						</form>
+					</c:when>
+					<c:when test="${loginUser.branchId == comment.branchId}">
+						<form action="Delete" method="post" onSubmit="return check()"><br />
+							<button type="submit" name="comment_id" value="${comment.id}">削除</button>
+						</form>
+					</c:when>
+				</c:choose>
 			</c:if>
-			<form action="Delete" method="post"><br />
-				<button type="submit" name="comment_id" value="${comment.id}">削除</button>
-			</form>
 		</c:forEach>
 
 
@@ -84,7 +148,6 @@
 			<button type="submit"  name="loginUser" value="${loginUser.id}">コメント</button>
 			<p></p>
 		</form>
-
 
 </c:forEach>
 </div>

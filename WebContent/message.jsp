@@ -9,6 +9,7 @@
 	<title>新規投稿</title>
 </head>
 <body>
+<h3>新規投稿入力ページ</h3>
 <div class="main-contents">
 <c:if test="${ not empty errorMessages }">
 	<div class="errorMessages">
@@ -21,17 +22,17 @@
 	<c:remove var="errorMessages" scope="session"/>
 </c:if>
 <form action="newMessage" method="post"><br />
-	<label for="title">タイトル</label>
+	<label for="title">件名</label>
 	<input name="title"/> <br />
 
-	<label for="category">カテゴリ</label>
+	<label for="category">カテゴリー</label>
 	<input name="category"/> <br />
 
 	<label for="text">本文</label>
 	<input name="text"/> <br />
 
 	<input type="submit" value="登録" /> <br />
-	<a href="./">戻る</a>
+	<a href="./">INFORMATIONへ戻る</a>
 </form>
 </div>
 </body>

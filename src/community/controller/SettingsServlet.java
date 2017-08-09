@@ -111,7 +111,7 @@ public class SettingsServlet extends HttpServlet {
 		}
 		if (StringUtils.isBlank(password) != true && StringUtils.isBlank(newPassword) != true) {
 			System.out.println(password+newPassword);
-			if (password != newPassword) {
+			if (!(password.contentEquals(newPassword))) {
 				messages.add("パスワードが一致しません");
 			}
 		}

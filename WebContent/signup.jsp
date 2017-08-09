@@ -7,8 +7,28 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>ユーザー登録</title>
+
+<script type="text/javascript">
+
+function check(){
+
+	if(window.confirm('以上の内容で登録してよろしいですか？')){ // 確認ダイアログを表示
+
+		return true; // 「OK」時は送信を実行
+
+	}
+	else{ // 「キャンセル」時の処理
+
+		return false; // 送信を中止
+
+	}
+
+}
+
+</script>
 </head>
 <body>
+<h3>○○社　入社登録</h3>
 <div class="main-contents">
 <c:if test="${ not empty errorMessages }">
 	<div class="errorMessages">
@@ -20,12 +40,15 @@
 	</div>
 	<c:remove var="errorMessages" scope="session"/>
 </c:if>
-<form action="signup" method="post"><br />
+<form action="signup" method="post" onSubmit="return check()"><br />
 	<label for="loginId">ID</label>
 	<input name="loginId" id="loginId" value="${user.loginId}"/> <br />
 
 	<label for="password">パスワード</label>
 	<input name="password" id="password" value="${user.password}"/> <br />
+
+	<label for="password">パスワード(確認用)</label>
+	<input name="newPassword" type="password" /> <br />
 
 	<label for="name">名前</label>
 	<input name="name"  id="name"/> <br />

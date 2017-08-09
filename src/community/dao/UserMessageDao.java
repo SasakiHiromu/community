@@ -32,12 +32,16 @@ public class UserMessageDao {
 			if (StringUtils.isBlank(category) == false) {
 				sql.append(" AND ");
 				sql.append("category = ?");
+
 			}
 			sql.append("ORDER BY created_at DESC");
 
 			ps = connection.prepareStatement(sql.toString());
-			ps.setString(1, startDate);
-			ps.setString(2, endDate);
+			ps.setString(1, startDate+ " 00:00:00");
+			ps.setString(2, endDate+ " 23:59:00"
+
+
+					);
 
 			if (StringUtils.isBlank(category) == false) {
 				ps.setString(3, category);
@@ -64,6 +68,7 @@ public class UserMessageDao {
 				String title = rs.getString("title");
 				String category = rs.getString("category");
 				String text = rs.getString("text");
+				int userId = rs.getInt("user_id");
 				Timestamp createdAt = rs.getTimestamp("created_at");
 
 				UserMessage message = new UserMessage();
@@ -72,6 +77,7 @@ public class UserMessageDao {
 				message.setTitle(title);
 				message.setCategory(category);
 				message.setText(text);
+				message.setUserId(userId);
 				message.setCreatedAt(createdAt);
 
 				ret.add(message);

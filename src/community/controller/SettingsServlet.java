@@ -81,6 +81,8 @@ public class SettingsServlet extends HttpServlet {
 		} else {
 			session.setAttribute("errorMessages", messages);
 			request.setAttribute("editUser", editUser);
+			request.setAttribute("newBranch", request.getParameter("allbranch.name"));
+			request.setAttribute("newJob", request.getParameter("alljob.name"));
 			//response.sendRedirect("settings");
 			request.getRequestDispatcher("settings.jsp").forward(request, response);
 		}

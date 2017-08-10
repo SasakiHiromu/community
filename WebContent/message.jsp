@@ -37,7 +37,12 @@
 	<select name="category">
 		<option value="" selected>カテゴリーを選ぶ</option>
 			<c:forEach items="${categories}" var="category">
-				<option value="${category}"><c:out value="${category}"></c:out></option>
+				<c:if test="${oldCategory == category}">
+					<option value="${category}" selected><c:out value="${category}"></c:out></option>
+				</c:if>
+				<c:if test="${oldCategory != category}">
+					<option value="${category}" ><c:out value="${category}"></c:out></option>
+				</c:if>
 			</c:forEach>
 	</select><br />
 	<label for="newCategory">新規カテゴリー作成</label>

@@ -57,6 +57,10 @@ public class NewMessageServlet extends HttpServlet {
 			new MessageService().register(message);
 			response.sendRedirect("./");
 		} else {
+			if (StringUtils.isBlank(request.getParameter("category")) != true) {
+				request.setAttribute("oldCategory", request.getParameter("category"));
+			}
+
 			session.setAttribute("errorMessages", messages);
 			request.setAttribute("message", message);
 			request.getRequestDispatcher("message.jsp").forward(request, response);

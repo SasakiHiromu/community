@@ -7,6 +7,15 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>新規投稿</title>
+
+	<script>
+   function DisableButton(b)
+   {
+      b.disabled = true;
+
+      b.form.submit();
+   }
+</script>
 </head>
 <body>
 <h3>新規投稿入力ページ</h3>
@@ -23,15 +32,21 @@
 </c:if>
 <form action="newMessage" method="post"><br />
 	<label for="title">件名</label>
-	<input name="title"/> <br />
-
-	<label for="category">カテゴリー</label>
-	<input name="category"/> <br />
+	<input name="title" value="${message.title}"/> <br />
+既存のカテゴリーから指定
+	<select name="category">
+		<option value="" selected>カテゴリーを選ぶ</option>
+			<c:forEach items="${categories}" var="category">
+				<option value="${category}"><c:out value="${category}"></c:out></option>
+			</c:forEach>
+	</select><br />
+	<label for="newCategory">新規カテゴリー作成</label>
+	<input name="newCategory" value="${message.category}"/> <br />
 
 	<label for="text">本文</label>
-	<input name="text"/> <br />
+	<textarea name="text" cols="100" rows="5" >${message.text}</textarea><br />
 
-	<input type="submit" value="登録" /> <br />
+	<input type="submit" value="新規投稿" onclick="DisableButton(this);" /> <br />
 	<a href="./">INFORMATIONへ戻る</a>
 </form>
 </div>

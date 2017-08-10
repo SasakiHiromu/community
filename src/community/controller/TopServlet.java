@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
 
@@ -37,6 +38,7 @@ public class TopServlet extends HttpServlet {
 			HttpServletResponse response) throws IOException,ServletException {
 
 		String category = null;
+		HttpSession session = request.getSession();
 
 
 		List<User> getAllUser = new UserService().getAllUser();
@@ -49,19 +51,17 @@ public class TopServlet extends HttpServlet {
 		request.setAttribute("alljobs", getAllJob);
 
 		Date date = new Date();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-		String startDate = "2017/7/31 00:00:00";
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String startDate = "2017/7/31";
 		String endDate = sdf.format(date).toString();
-		String diaryDate = df.format(date).toString();
-		request.setAttribute("diaryDate", diaryDate);
+		request.setAttribute("diaryDate", endDate);
 
-		List<UserMessage> categoryList = new MessageService().getMessage(startDate,endDate,category);
+		List<UserMessage> categoryList = new MessageService().getCategory();
 		List<String> categories = new ArrayList<String>();
 		for (int i = 0; i < categoryList.size(); i++) {
 			 categories.add(categoryList.get(i).getCategory());
 		}
-		request.setAttribute("categories", categories);
+		session.setAttribute("categories", categories);
 
 		if (StringUtils.isBlank(request.getParameter("startDate")) == false) {
 			startDate = request.getParameter("startDate");

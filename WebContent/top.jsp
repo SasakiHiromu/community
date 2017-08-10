@@ -6,6 +6,7 @@
 <%@ page import="java.util.Date, java.text.DateFormat" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,12 +30,27 @@ function check(){
 
 }
 
+//送信ボタンを押した際に送信ボタンを無効化する（連打による多数送信回避）
+$(function(){
+	$('[type="submit"]').click(function(){
+		$(this).prop('disabled',true);//ボタンを無効化する
+		$(this).closest('form').submit();//フォームを送信する
+	});
+});
+
+function DisableButton(b)
+{
+   b.disabled = true;
+
+   b.form.submit();
+}
+
 </script>
 
 </head>
 <body>
 <h3>○○社INFORMATION</h3>
-<c:out value="${loginUser.name}でログイン中です"></c:out>
+
 <div class="main-contents">
 
 <a href="newMessage">新規投稿入力ページ</a>
@@ -43,7 +59,9 @@ function check(){
 	<a href="status">社員アカウント管理ページ</a>
 </c:if>
 
-<a href="logout">ログアウト</a>
+<a href="logout">ログアウト</a><br />
+
+<c:out value="${loginUser.name}でログイン中です"></c:out>
 
 <div class="header"></div>
 
@@ -74,8 +92,13 @@ function check(){
 			カテゴリー:<span class="category"><c:out value="${message.category}" /></span><br />
 			<p></p>
 		</div>
-	本文<div class="text"><c:out value="${message.text}" /></div>
-	投稿日時<div class="date"><fmt:formatDate value="${message.createdAt}"
+	本文
+		<c:forEach var="text" items="${fn:split(message.text, '
+	')}">
+	    <div>${text}</div>
+	</c:forEach>
+	投稿日時
+	<div class="date"><fmt:formatDate value="${message.createdAt}"
 	pattern="yyyy/MM/dd HH:mm:ss" /></div>
 
 	<c:choose>
@@ -100,7 +123,11 @@ function check(){
 
 		<c:forEach items="${comments}" var="comment">
 			<c:if test="${message.id == comment.messageId}" >
-				<c:out value="${comment.text}" /><br />
+
+				<c:forEach var="text" items="${fn:split(comment.text, '
+				')}">
+				    <div>${text}</div>
+				</c:forEach>
 
 					<c:forEach items="${allusers}" var="alluser">
 						<c:if test="${alluser.id == comment.userId}">
@@ -145,7 +172,8 @@ function check(){
 		<form action="newComment" method="post"><br />
 			<textarea name="text" rows="4" cols="40"></textarea><br />
 			<input type="hidden" name="message_id" value="${message.id}" />
-			<button type="submit"  name="loginUser" value="${loginUser.id}">コメント</button>
+			<button type="submit"  name="loginUser" value="${loginUser.id}"
+			onclick="DisableButton(this);">コメント</button>
 			<p></p>
 		</form>
 

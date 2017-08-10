@@ -37,8 +37,8 @@ public class UserMessageDao {
 			sql.append("ORDER BY created_at DESC");
 
 			ps = connection.prepareStatement(sql.toString());
-			ps.setString(1, startDate+ " 00:00:00");
-			ps.setString(2, endDate+ " 23:59:00"
+			ps.setString(1, startDate + " 00:00:00");
+			ps.setString(2, endDate + " 23:59:59"
 
 
 					);
@@ -81,6 +81,43 @@ public class UserMessageDao {
 				message.setCreatedAt(createdAt);
 
 				ret.add(message);
+			}
+			return ret;
+		} finally {
+			close(rs);
+		}
+	}
+
+	public List<UserMessage> getUserCategory(Connection connection) {
+
+		PreparedStatement ps = null;
+		try {
+			StringBuilder sql = new StringBuilder();
+			sql.append("SELECT DISTINCT category FROM message");
+
+			ps = connection.prepareStatement(sql.toString());
+
+			ResultSet rs = ps.executeQuery();
+			List<UserMessage> ret = getUserCategoryList(rs);
+			return ret;
+		} catch (SQLException e) {
+			throw new SQLRuntimeException(e);
+		} finally {
+			close(ps);
+		}
+	}
+
+	private List<UserMessage> getUserCategoryList(ResultSet rs)
+			throws SQLException {
+
+		List<UserMessage> ret = new ArrayList<UserMessage>();
+		try {
+			while (rs.next()) {
+				String category = rs.getString("category");
+
+				UserMessage categories = new UserMessage();
+				categories.setCategory(category);
+				ret.add(categories);
 			}
 			return ret;
 		} finally {

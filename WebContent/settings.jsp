@@ -27,6 +27,8 @@ function check(){
 </script>
 </head>
 <body>
+<h3>○○社　社員編集ページ</h3>
+
 <div class="main-contents">
 
 <c:if test="${ not empty errorMessages }">
@@ -56,7 +58,7 @@ function check(){
 	<label for="branchId">所属名</label>
 
 	<select name="branchId">
-		<option selected>所属</option>
+	<option selected>所属</option>
 		<c:forEach items="${allbranches}" var="allbranche">
 			<option value="${allbranche.id}">${allbranche.name}</option>
 		</c:forEach>
@@ -73,7 +75,7 @@ function check(){
 	</select><br />
 
 
-	<button type="submit"  name="id" value="${editUser.id}">登録</button><br />
+	<button type="submit"  name="id" value="${editUser.id}">編集</button><br />
 	<a href="status">ユーザー管理画面に戻る</a>
 </form>
 </div>

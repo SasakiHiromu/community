@@ -79,4 +79,28 @@ public class MessageService {
 			close(connection);
 		}
 	}
+
+	public List<UserMessage> getCategory() {
+
+		Connection connection = null;
+		try {
+			connection = getConnection();
+
+			UserMessageDao messageDao = new UserMessageDao();
+			List<UserMessage> ret = messageDao.
+					getUserCategory(connection);
+
+			commit(connection);
+
+			return ret;
+		} catch (RuntimeException e) {
+			rollback(connection);
+			throw e;
+		} catch (Error e) {
+			rollback(connection);
+			throw e;
+		} finally {
+			close(connection);
+		}
+	}
 }

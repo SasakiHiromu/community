@@ -25,6 +25,7 @@ public class NewMessageServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws IOException, ServletException {
 
+
 		request.getRequestDispatcher("message.jsp").forward(request, response);
 	}
 	protected void doPost(HttpServletRequest request,
@@ -34,24 +35,31 @@ public class NewMessageServlet extends HttpServlet {
 
 		List<String> messages = new ArrayList<String>();
 
+		User users = (User) session.getAttribute("loginUser");
+
+		Message message = new Message();
+		message.setTitle(request.getParameter("title"));
+
+		if (StringUtils.isBlank(request.getParameter("category")) == true) {
+			message.setCategory(request.getParameter("newCategory"));
+		}
+
+		message.setText(request.getParameter("text"));
+		message.setBranchId(users.getBranchId());
+		message.setJobId(users.getJobId());
+		message.setUserId(users.getId());
+
 		if (isValid(request, messages) == true) {
-
-			User users = (User) session.getAttribute("loginUser");
-
-			Message message = new Message();
-			message.setTitle(request.getParameter("title"));
-			message.setCategory(request.getParameter("category"));
-			message.setText(request.getParameter("text"));
-			message.setBranchId(users.getBranchId());
-			message.setJobId(users.getJobId());
-			message.setUserId(users.getId());
+			if (StringUtils.isBlank(request.getParameter("newCategory")) == true) {
+				message.setCategory(request.getParameter("category"));
+			}
 
 			new MessageService().register(message);
-
 			response.sendRedirect("./");
 		} else {
 			session.setAttribute("errorMessages", messages);
-			response.sendRedirect("newMessage");
+			request.setAttribute("message", message);
+			request.getRequestDispatcher("message.jsp").forward(request, response);
 		}
 	}
 
@@ -60,13 +68,18 @@ public class NewMessageServlet extends HttpServlet {
 		String text = request.getParameter("text");
 		String title = request.getParameter("title");
 		String category = request.getParameter("category");
+		String newCategory = request.getParameter("newCategory");
 
 		if (StringUtils.isBlank(title) == true) {
 			messages.add("件名を入力してください");
 		}
 
-		if (StringUtils.isBlank(category) == true) {
-			messages.add("カテゴリーを入力してください");
+		if (StringUtils.isBlank(category) == true && StringUtils.isBlank(newCategory) == true) {
+			messages.add("既存のカテゴリーを選択するか、新規カテゴリーを作成してください");
+		}
+
+		if (StringUtils.isBlank(category) == false && StringUtils.isBlank(newCategory) == false) {
+			messages.add("既存のカテゴリーか新規カテゴリーどちらかにしてください");
 		}
 
 		if (StringUtils.isBlank(text) == true) {

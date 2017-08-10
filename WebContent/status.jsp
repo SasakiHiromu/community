@@ -55,7 +55,6 @@
 				</form>
 			</td>
 		</tr>
-		<br />
 	</c:forEach>
 </table>
 <a href="./">INFORMATIONへ戻る</a>

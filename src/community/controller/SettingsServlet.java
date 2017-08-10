@@ -58,6 +58,12 @@ public class SettingsServlet extends HttpServlet {
 		User editUser = getEditUser(request);
 		session.setAttribute("editUser", editUser);
 
+		List<Branch> getAllBranch = new BranchService().getAllBranch();
+		request.setAttribute("allbranches", getAllBranch);
+
+		List<Job> getAllJob = new JobService().getAllJob();
+		request.setAttribute("alljobs", getAllJob);
+
 		if (isValid(request, messages) == true) {
 
 			try {
@@ -74,7 +80,9 @@ public class SettingsServlet extends HttpServlet {
 			response.sendRedirect("status");
 		} else {
 			session.setAttribute("errorMessages", messages);
-			response.sendRedirect("settings");
+			request.setAttribute("editUser", editUser);
+			//response.sendRedirect("settings");
+			request.getRequestDispatcher("settings.jsp").forward(request, response);
 		}
 	}
 

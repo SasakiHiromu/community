@@ -42,21 +42,21 @@ function check(){
 </c:if>
 <form action="signup" method="post" onSubmit="return check()"><br />
 	<label for="loginId">ID</label>
-	<input name="loginId" id="loginId" value="${user.loginId}"/> <br />
+	<input name="loginId" id="loginId" value="${user.loginId}" maxlength="20"/><br /><6文字以上20文字以下、半角英数字のみ><br />
 
 	<label for="password">パスワード</label>
-	<input name="password" id="password" value="${user.password}"/> <br />
+	<input name="password" id="password" value="${user.password}" maxlength="20"/><br /><6文字以上20文字以下、半角英数字のみ><br />
 
 	<label for="password">パスワード(確認用)</label>
-	<input name="newPassword" type="password" /> <br />
+	<input name="newPassword" type="password" maxlength="20"/><br /><6文字以上20文字以下、半角英数字のみ><br />
 
 	<label for="name">名前</label>
-	<input name="name"  id="name"/> <br />
+	<input name="name"  id="name" maxlength="10"/><br /><10文字以下><br />
 
 	<label for="branchId">所属名</label>
 
 	<select name="branchId">
-		<option selected>所属</option>
+		<option value="0" selected>所属</option>
 		<c:forEach items="${allbranches}" var="allbranche">
 			<option value="${allbranche.id}">${allbranche.name}</option>
 		</c:forEach>
@@ -66,14 +66,14 @@ function check(){
 	<label for="branchId">役職名</label>
 
 	<select name="jobId">
-		<option selected>役職</option>
+		<option value="0" selected>役職</option>
 			<c:forEach items="${alljobs}" var="alljob">
 				<option value="${alljob.id}">${alljob.name}</option>
 			</c:forEach>
 	</select><br />
 
 	<input type="submit" value="登録" /> <br />
-	<a href="status">戻る</a>
+	<a href="status">社員アカウント管理画面へ戻る</a>
 </form>
 </div>
 </body>

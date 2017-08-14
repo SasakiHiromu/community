@@ -170,7 +170,8 @@ function DisableButton(b)
 
 
 		<form action="newComment" method="post"><br />
-			<textarea style="resize:none" name="text" rows="4" cols="40"></textarea><br />
+			<textarea style="resize:none" name="text" rows="4" cols="40" maxlength='500'></textarea>
+			<label style ="right"><500文字以下></label><br />
 			<input type="hidden" name="message_id" value="${message.id}" />
 			<button type="submit"  name="loginUser" value="${loginUser.id}"
 			onclick="DisableButton(this);">コメント</button>

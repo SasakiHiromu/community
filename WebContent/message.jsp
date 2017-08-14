@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@page isELIgnored="false"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html >
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -32,7 +32,7 @@
 </c:if>
 <form action="newMessage" method="post"><br />
 	<label for="title">件名</label><br />
-	<input name="title" value="${message.title}"/><30文字以下><br />
+	<input name="title" value="${message.title}" maxlength="30"/><30文字以下><br />
 既存のカテゴリーから指定<br />
 	<select name="category">
 		<option value="" selected>カテゴリーを選ぶ</option>
@@ -47,10 +47,10 @@
 			</c:forEach>
 	</select><br />
 	<label for="newCategory">新規カテゴリー作成</label><br />
-	<input name="newCategory" value="${message.category}"/><10文字以下><br />
+	<input name="newCategory" value="${message.category}" maxlength="10"/><10文字以下><br />
 
 	<label for="text">本文</label><br />
-	<textarea style="resize:none" name="text" cols="100" rows="10" >${message.text}</textarea>
+	<textarea style="resize:none" name="text" cols="100" rows="10" maxlength="1000">${message.text}</textarea>
 	<label style ="right"><1000文字以下></label><br />
 
 

@@ -71,12 +71,23 @@ public class SignUpServlet extends HttpServlet {
 		String login_id = request.getParameter("loginId");
 		String password = request.getParameter("password");
 		String newPassword = request.getParameter("newPassword");
+		String name = request.getParameter("name");
+		int branchId = Integer.parseInt(request.getParameter("branchId"));
+		int jobId = Integer.parseInt(request.getParameter("jobId"));
 
 
-		if (StringUtils.isEmpty(login_id) == true) {
+		if (StringUtils.isBlank(login_id) == true) {
 			messages.add("IDを入力してください");
 		}
-		if (StringUtils.isEmpty(password) == true) {
+		if (StringUtils.isBlank(password) == true) {
+			messages.add("パスワードを入力してください");
+		}
+
+		if (password.matches("^[0-9a-zA-Z]+$") && 6 <= password.length() && password.length() <= 20) {
+			messages.add("パスワードを入力してください");
+		}
+
+		if (newPassword.matches("^[0-9a-zA-Z]+$") && 6 <= newPassword.length() && newPassword.length() <= 20) {
 			messages.add("パスワードを入力してください");
 		}
 
@@ -85,6 +96,22 @@ public class SignUpServlet extends HttpServlet {
 			if (!(password.contentEquals(newPassword))) {
 				messages.add("パスワードが一致しません");
 			}
+		}
+
+		if (StringUtils.isBlank(name) == true) {
+			messages.add("名前を入力してください");
+		}
+
+		if (10 >= name.length()) {
+			messages.add("名前を10文字以下で入力してください");
+		}
+
+		if ( branchId == 0) {
+			messages.add("所属を選択してください");
+		}
+
+		if (jobId == 0) {
+			messages.add("役職を選択してください");
 		}
 
 		// TODO アカウントが既に利用されていないか、メールアドレスが既に登録されていないかなどの確認も必要

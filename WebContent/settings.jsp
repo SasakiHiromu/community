@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@page isELIgnored="false"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html >
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -44,7 +44,7 @@ function check(){
 
 <form action="settings" method="post" onSubmit="return check()"><br />
 	<label for="loginId">ID</label>
-	<input name="loginId" value="${editUser.loginId}"/> <br />
+	<input name="loginId" value="${editUser.loginId}" /> <br />
 
 	<label for="password">パスワード</label>
 	<input name="password" type="password" /> <br />

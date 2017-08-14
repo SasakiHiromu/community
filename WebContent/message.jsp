@@ -31,27 +31,31 @@
 	<c:remove var="errorMessages" scope="session"/>
 </c:if>
 <form action="newMessage" method="post"><br />
-	<label for="title">件名</label>
-	<input name="title" value="${message.title}"/> <br />
-既存のカテゴリーから指定
+	<label for="title">件名</label><br />
+	<input name="title" value="${message.title}"/><30文字以下><br />
+既存のカテゴリーから指定<br />
 	<select name="category">
 		<option value="" selected>カテゴリーを選ぶ</option>
 			<c:forEach items="${categories}" var="category">
 				<c:if test="${oldCategory == category}">
-					<option value="${category}" selected><c:out value="${category}"></c:out></option>
+					<option value="${category}" selected>
+					<c:out value="${category}"></c:out></option>
 				</c:if>
 				<c:if test="${oldCategory != category}">
 					<option value="${category}" ><c:out value="${category}"></c:out></option>
 				</c:if>
 			</c:forEach>
 	</select><br />
-	<label for="newCategory">新規カテゴリー作成</label>
-	<input name="newCategory" value="${message.category}"/> <br />
+	<label for="newCategory">新規カテゴリー作成</label><br />
+	<input name="newCategory" value="${message.category}"/><10文字以下><br />
 
-	<label for="text">本文</label>
-	<textarea name="text" cols="100" rows="5" >${message.text}</textarea><br />
+	<label for="text">本文</label><br />
+	<textarea style="resize:none" name="text" cols="100" rows="10" >${message.text}</textarea>
+	<label style ="right"><1000文字以下></label><br />
 
-	<input type="submit" value="新規投稿" onclick="DisableButton(this);" /> <br />
+
+	<input type="submit" value="新規投稿" onclick="DisableButton(this);" /><br />
+
 	<a href="./">INFORMATIONへ戻る</a>
 </form>
 </div>

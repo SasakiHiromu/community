@@ -33,23 +33,24 @@ public class LoginServlet extends HttpServlet {
 		String loginId = request.getParameter("loginId");
 		String password = request.getParameter("password");
 
+		List<String> messages = new ArrayList<String>();
+
 
 		LoginService loginService = new LoginService();
 		User users = loginService.login(loginId, password);
 
 		HttpSession session = request.getSession();
+
 		if (users != null) {
 
 			session.setAttribute("loginUser", users);
 			response.sendRedirect("./");
 		} else {
 			request.setAttribute("loginId", loginId);
-			List<String> messages = new ArrayList<String>();
 			messages.add("ログインに失敗しました。");
 			session.setAttribute("errorMessages", messages);
 			request.getRequestDispatcher("/login.jsp").forward(request, response);
 
 		}
 	}
-
 }

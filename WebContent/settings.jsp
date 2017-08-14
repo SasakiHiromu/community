@@ -55,22 +55,31 @@ function check(){
 	<label for="name">名前</label>
 	<input name="name" value="${editUser.name}"/> <br />
 
-	<label for="branchId">所属名</label>
 
+所属名
 	<select name="branchId">
-	<option selected>所属</option>
-		<c:forEach items="${allbranches}" var="allbranche">
-			<option value="${allbranche.id}">${allbranche.name}</option>
-		</c:forEach>
+		<option selected>所属</option>
+			<c:forEach items="${allbranches}" var="allbranche">
+				<c:if test="${allbranche.id == editUser.branchId}">
+					<option value="${allbranche.id}" selected>${allbranche.name}</option>
+				</c:if>
+				<c:if test="${allbranche.id != editUser.branchId}">
+					<option value="${allbranche.id}" >${allbranche.name}</option>
+				</c:if>
+			</c:forEach>
 	</select><br />
 
 
-	<label for="jobId">役職名</label>
-
+役職名
 	<select name="jobId">
 		<option selected>役職</option>
 			<c:forEach items="${alljobs}" var="alljob">
-				<option value="${alljob.id}">${alljob.name}</option>
+				<c:if test="${alljob.id == editUser.jobId}">
+					<option value="${alljob.id}" selected>${alljob.name}</option>
+				</c:if>
+				<c:if test="${alljob.id != editUser.jobId}">
+					<option value="${alljob.id}" >${alljob.name}</option>
+				</c:if>
 			</c:forEach>
 	</select><br />
 

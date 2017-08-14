@@ -78,6 +78,10 @@ public class NewMessageServlet extends HttpServlet {
 			messages.add("件名を入力してください");
 		}
 
+		if (title.length() >= 30) {
+			messages.add("件名を30文字以下で入力してください");
+		}
+
 		if (StringUtils.isBlank(category) == true && StringUtils.isBlank(newCategory) == true) {
 			messages.add("既存のカテゴリーを選択するか、新規カテゴリーを作成してください");
 		}
@@ -86,12 +90,16 @@ public class NewMessageServlet extends HttpServlet {
 			messages.add("既存のカテゴリーか新規カテゴリーどちらかにしてください");
 		}
 
+		if (newCategory.length() >= 10) {
+			messages.add("新規カテゴリーは10文字以下で入力してください");
+		}
+
 		if (StringUtils.isBlank(text) == true) {
 			messages.add("本文を入力してください");
 		}
 
-		if (1000L < text.length()) {
-			messages.add("1000文字以下で入力してください");
+		if (text.length() >= 1000) {
+			messages.add("本文を1000文字以下で入力してください");
 		}
 
 		if (messages.size() == 0) {

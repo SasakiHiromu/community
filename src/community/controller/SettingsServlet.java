@@ -70,7 +70,7 @@ public class SettingsServlet extends HttpServlet {
 				new UserService().update(editUser);
 			} catch (NoRowsUpdatedRuntimeException e) {
 				session.removeAttribute("editUser");
-				messages.add("他の人によって更新されています。最新のデータを表示しました。データを確認してください。");
+				messages.add("他の人によって更新されています。");
 				session.setAttribute("errorMessages", messages);
 				response.sendRedirect("settings");
 			}
@@ -81,10 +81,11 @@ public class SettingsServlet extends HttpServlet {
 		} else {
 			session.setAttribute("errorMessages", messages);
 			request.setAttribute("editUser", editUser);
-			request.setAttribute("newBranch", request.getParameter("allbranch.name"));
-			request.setAttribute("newJob", request.getParameter("alljob.name"));
+			request.setAttribute("newBranch", request.getParameter("allbranch.id"));
+			request.setAttribute("newJob", request.getParameter("alljob.id"));
+			System.out.println(request.getParameter("jobId"));
 			//response.sendRedirect("settings");
-			request.getRequestDispatcher("settings.jsp").forward(request, response);
+			request.getRequestDispatcher("/settings.jsp").forward(request, response);
 		}
 	}
 
@@ -94,9 +95,12 @@ public class SettingsServlet extends HttpServlet {
 
 		UserService userservice = new UserService();
 		User editUser = userservice.getUser(Integer.parseInt(request.getParameter("id")));
+		String password = request.getParameter("password");
 
 		editUser.setLoginId(request.getParameter("loginId"));
-		editUser.setPassword(request.getParameter("password"));
+		if (password.matches("^[0-9a-zA-Z]+$") && 6 <= password.length() && password.length() <= 20) {
+			editUser.setPassword(request.getParameter("password"));
+		}
 		editUser.setName(request.getParameter("name"));
 		editUser.setBranchId(Integer.parseInt(request.getParameter("branchId")));
 		editUser.setJobId(Integer.parseInt(request.getParameter("jobId")));
@@ -111,16 +115,15 @@ public class SettingsServlet extends HttpServlet {
 		String newPassword = request.getParameter("newPassword");
 
 		if (StringUtils.isEmpty(loginId) == true) {
-			messages.add("アカウント名を入力してください");
+			messages.add("IDを入力してください");
 		}
-		if (StringUtils.isEmpty(password) == true) {
-			messages.add("パスワードを入力してください");
-		}
-		if (StringUtils.isEmpty(newPassword) == true) {
-			messages.add("確認用パスワードを入力してください");
-		}
+//		if (StringUtils.isEmpty(password) == true) {
+//			messages.add("パスワードを入力してください");
+//		}
+//		if (StringUtils.isEmpty(newPassword) == true) {
+//			messages.add("確認用パスワードを入力してください");
+//		}
 		if (StringUtils.isBlank(password) != true && StringUtils.isBlank(newPassword) != true) {
-			System.out.println(password+newPassword);
 			if (!(password.contentEquals(newPassword))) {
 				messages.add("パスワードが一致しません");
 			}

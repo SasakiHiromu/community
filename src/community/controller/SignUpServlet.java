@@ -92,7 +92,6 @@ public class SignUpServlet extends HttpServlet {
 		}
 
 		if (StringUtils.isBlank(password) != true && StringUtils.isBlank(newPassword) != true) {
-			System.out.println(password+newPassword);
 			if (!(password.contentEquals(newPassword))) {
 				messages.add("パスワードが一致しません");
 			}
@@ -102,8 +101,8 @@ public class SignUpServlet extends HttpServlet {
 			messages.add("名前を入力してください");
 		}
 
-		if (10 >= name.length()) {
-			messages.add("名前を10文字以下で入力してください");
+		if (10 <= name.length()) {
+			messages.add("名前を10文字以内で入力してください");
 		}
 
 		if ( branchId == 0) {

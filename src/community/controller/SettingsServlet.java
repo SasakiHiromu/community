@@ -83,7 +83,6 @@ public class SettingsServlet extends HttpServlet {
 			request.setAttribute("editUser", editUser);
 			request.setAttribute("newBranch", request.getParameter("allbranch.id"));
 			request.setAttribute("newJob", request.getParameter("alljob.id"));
-			System.out.println(request.getParameter("jobId"));
 			//response.sendRedirect("settings");
 			request.getRequestDispatcher("/settings.jsp").forward(request, response);
 		}
@@ -113,6 +112,10 @@ public class SettingsServlet extends HttpServlet {
 		String loginId = request.getParameter("loginId");
 		String password = request.getParameter("password");
 		String newPassword = request.getParameter("newPassword");
+		String name = request.getParameter("name");
+		int branchId = Integer.parseInt(request.getParameter("branchId"));
+		int jobId = Integer.parseInt(request.getParameter("jobId"));
+
 
 		if (StringUtils.isEmpty(loginId) == true) {
 			messages.add("IDを入力してください");
@@ -127,6 +130,22 @@ public class SettingsServlet extends HttpServlet {
 			if (!(password.contentEquals(newPassword))) {
 				messages.add("パスワードが一致しません");
 			}
+		}
+
+		if (StringUtils.isBlank(name) == true) {
+			messages.add("名前を入力してください");
+		}
+
+		if (10 <= name.length()) {
+			messages.add("名前を10文字以内で入力してください");
+		}
+
+		if ( branchId == 0) {
+			messages.add("所属を選択してください");
+		}
+
+		if (jobId == 0) {
+			messages.add("役職を選択してください");
 		}
 
 		// TODO アカウントが既に利用されていないか、メールアドレスが既に登録されていないかなどの確認も必要

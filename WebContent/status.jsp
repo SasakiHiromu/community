@@ -3,11 +3,30 @@
 <%@page isELIgnored="false"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html >
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>社員アカウント管理</title>
+<script type="text/javascript">
+
+function check(){
+
+	if(window.confirm('登録しますか？')){ // 確認ダイアログを表示
+
+		return true; // 「OK」時は送信を実行
+
+	}
+	else{ // 「キャンセル」時の処理
+
+		return false; // 送信を中止
+
+	}
+
+}
+
+</script>
+
 </head>
 <body>
 <h3>社員アカウント管理</h3>
@@ -41,7 +60,7 @@
 				</form>
 			</td>
 			<td>
-				<form action="stopped" method="post">
+				<form action="stopped" method="post" onSubmit="return check()">
 					<input type="hidden" name="id" value="${alluser.id}">
 					<c:if test="${alluser.isStopped == 0}">
 						<input type="hidden" name="isStopped" value=1>

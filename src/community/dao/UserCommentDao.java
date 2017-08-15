@@ -59,7 +59,6 @@ public class UserCommentDao {
 				comment.setJobId(jobId);
 				comment.setUserId(userId);
 				comment.setCreatedAt(createdAt);
-				System.out.println();
 
 				ret.add(comment);
 			}

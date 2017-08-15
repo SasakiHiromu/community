@@ -44,21 +44,21 @@ function check(){
 
 <form action="settings" method="post" onSubmit="return check()"><br />
 	<label for="loginId">ID</label>
-	<input name="loginId" value="${editUser.loginId}" /> <br />
+	<input name="loginId" value="${editUser.loginId}" /><br /><6文字以上20文字以下、半角英数字のみ><br />
 
 	<label for="password">パスワード</label>
-	<input name="password" type="password" /> <br />
+	<input name="password" type="password" /><br /><6文字以上20文字以下、半角英数字のみ><br />
 
 	<label for="password">パスワード(確認用)</label>
-	<input name="newPassword" type="password" /> <br />
+	<input name="newPassword" type="password" /><br /><6文字以上20文字以下、半角英数字のみ><br />
 
 	<label for="name">名前</label>
-	<input name="name" value="${editUser.name}"/> <br />
+	<input name="name" value="${editUser.name}"/><br /><10文字以下><br />
 
 
 所属名
 	<select name="branchId">
-		<option selected>所属</option>
+		<option value="0" selected>所属</option>
 			<c:forEach items="${allbranches}" var="allbranche">
 				<c:if test="${allbranche.id == editUser.branchId}">
 					<option value="${allbranche.id}" selected>${allbranche.name}</option>
@@ -72,7 +72,7 @@ function check(){
 
 役職名
 	<select name="jobId">
-		<option selected>役職</option>
+		<option value="0" selected>役職</option>
 			<c:forEach items="${alljobs}" var="alljob">
 				<c:if test="${alljob.id == editUser.jobId}">
 					<option value="${alljob.id}" selected>${alljob.name}</option>

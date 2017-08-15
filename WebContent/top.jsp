@@ -45,10 +45,19 @@ function DisableButton(b)
    b.form.submit();
 }
 
+function init() {
+	document.getElementById('button').disabled = true;
+	}
+	function doChange() {
+	var txtValue = document.getElementById('text').value;
+	document.getElementById('button').disabled = (txtValue.length == 0);
+	}
+
+
 </script>
 
 </head>
-<body>
+<body onLoad="init();">
 <h3>○○社INFORMATION</h3>
 
 <div class="main-contents">
@@ -97,6 +106,19 @@ function DisableButton(b)
 	')}">
 	    <div>${text}</div>
 	</c:forEach>
+
+	<c:forEach items="${allbranches}" var="allbranche">
+		<c:if test="${message.branchId == allbranche.id}">
+			所属:<c:out value="${allbranche.name}" /><br />
+		</c:if>
+	</c:forEach>
+
+	<c:forEach items="${alljobs}" var="alljob">
+		<c:if test="${message.jobId == alljob.id}">
+			役職:<c:out value="${alljob.name}" /><br />
+		</c:if>
+	</c:forEach>
+
 	投稿日時
 	<div class="date"><fmt:formatDate value="${message.createdAt}"
 	pattern="yyyy/MM/dd HH:mm:ss" /></div>
@@ -147,7 +169,6 @@ function DisableButton(b)
 						</c:if>
 					</c:forEach>
 
-
 				<c:choose>
 					<c:when test="${loginUser.jobId == 2}">
 						<form action="Delete" method="post" onSubmit="return check()"><br />
@@ -165,16 +186,17 @@ function DisableButton(b)
 						</form>
 					</c:when>
 				</c:choose>
+
 			</c:if>
 		</c:forEach>
 
 
 		<form action="newComment" method="post"><br />
-			<textarea style="resize:none" name="text" rows="4" cols="40" maxlength='500'></textarea>
+			<textarea  id="text" onChange="doChange();" style="resize:none" name="text" rows="4" cols="40" maxlength='500'></textarea>
 			<label style ="right"><500文字以下></label><br />
 			<input type="hidden" name="message_id" value="${message.id}" />
-			<button type="submit"  name="loginUser" value="${loginUser.id}"
-			onclick="DisableButton(this);">コメント</button>
+			<button id="button" type="submit"  name="loginUser" value="${loginUser.id}"
+			onclick="DisableButton(this);" disabled>コメント</button>
 			<p></p>
 		</form>
 

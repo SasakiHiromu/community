@@ -47,10 +47,9 @@ public class LoginServlet extends HttpServlet {
 			response.sendRedirect("./");
 		} else {
 			request.setAttribute("loginId", loginId);
-			messages.add("ログインに失敗しました。");
+			messages.add("ログインに失敗しました");
 			session.setAttribute("errorMessages", messages);
 			request.getRequestDispatcher("/login.jsp").forward(request, response);
-
 		}
 	}
 }

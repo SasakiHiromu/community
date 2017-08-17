@@ -5,6 +5,7 @@
 <!DOCTYPE html >
 <html>
 <head>
+	<link href="css/loginstyle.css" rel="stylesheet" type="text/css">
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>ユーザー編集</title>
 <script type="text/javascript">
@@ -44,45 +45,63 @@ function check(){
 
 <form action="settings" method="post" onSubmit="return check()"><br />
 	<label for="loginId">ID</label>
-	<input name="loginId" value="${editUser.loginId}" /><br /><6文字以上20文字以下、半角英数字のみ><br />
+	<input name="loginId" value="${editUser.loginId}" /><br />6文字以上20文字以下、半角英数字のみ<br />
 
 	<label for="password">パスワード</label>
-	<input name="password" type="password" /><br /><6文字以上20文字以下、半角英数字のみ><br />
+	<input name="password" type="password" /><br />6文字以上20文字以下、半角英数字のみ<br />
 
 	<label for="password">パスワード(確認用)</label>
-	<input name="newPassword" type="password" /><br /><6文字以上20文字以下、半角英数字のみ><br />
+	<input name="newPassword" type="password" /><br />6文字以上20文字以下、半角英数字のみ<br />
 
 	<label for="name">名前</label>
-	<input name="name" value="${editUser.name}"/><br /><10文字以下><br />
+	<input name="name" value="${editUser.name}"/><br />10文字以下<br />
+
+	<c:if test="${editUser.jobId == 1}">
+		<c:forEach items="${allbranches}" var="allbranche">
+			<c:if test="${allbranche.id == editUser.branchId}">
+				<input name="branchId" value="${allbranche.id}" type="hidden" />
+			</c:if>
+		</c:forEach>
+	</c:if>
+
+	<c:if test="${editUser.jobId != 1}">
+	所属名
+		<select name="branchId">
+			<option value="0" selected>所属</option>
+				<c:forEach items="${allbranches}" var="allbranche">
+					<c:if test="${allbranche.id == editUser.branchId}">
+						<option value="${allbranche.id}" selected>${allbranche.name}</option>
+					</c:if>
+					<c:if test="${allbranche.id != editUser.branchId}">
+						<option value="${allbranche.id}" >${allbranche.name}</option>
+					</c:if>
+				</c:forEach>
+		</select><br />
+	</c:if>
 
 
-所属名
-	<select name="branchId">
-		<option value="0" selected>所属</option>
-			<c:forEach items="${allbranches}" var="allbranche">
-				<c:if test="${allbranche.id == editUser.branchId}">
-					<option value="${allbranche.id}" selected>${allbranche.name}</option>
-				</c:if>
-				<c:if test="${allbranche.id != editUser.branchId}">
-					<option value="${allbranche.id}" >${allbranche.name}</option>
-				</c:if>
-			</c:forEach>
-	</select><br />
+	<c:if test="${editUser.jobId == 1}">
+		<c:forEach items="${alljobs}" var="alljob">
+			<c:if test="${alljob.id == editUser.jobId}">
+				<input name="jobId" value="${alljob.id}" type="hidden" />
+			</c:if>
+		</c:forEach>
+	</c:if>
 
-
-役職名
-	<select name="jobId">
-		<option value="0" selected>役職</option>
-			<c:forEach items="${alljobs}" var="alljob">
-				<c:if test="${alljob.id == editUser.jobId}">
-					<option value="${alljob.id}" selected>${alljob.name}</option>
-				</c:if>
-				<c:if test="${alljob.id != editUser.jobId}">
-					<option value="${alljob.id}" >${alljob.name}</option>
-				</c:if>
-			</c:forEach>
-	</select><br />
-
+	<c:if test="${editUser.jobId != 1}">
+	役職名
+		<select name="jobId">
+			<option value="0" selected>役職</option>
+				<c:forEach items="${alljobs}" var="alljob">
+					<c:if test="${alljob.id == editUser.jobId}">
+						<option value="${alljob.id}" selected>${alljob.name}</option>
+					</c:if>
+					<c:if test="${alljob.id != editUser.jobId}">
+						<option value="${alljob.id}" >${alljob.name}</option>
+					</c:if>
+				</c:forEach>
+		</select><br />
+	</c:if>
 
 	<button type="submit"  name="id" value="${editUser.id}">編集</button><br />
 	<a href="status">ユーザー管理画面に戻る</a>

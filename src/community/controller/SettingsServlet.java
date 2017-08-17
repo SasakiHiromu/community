@@ -32,6 +32,21 @@ public class SettingsServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		UserService userservice = new UserService();
 
+		if(request.getParameter("id") == null ) {
+			response.sendRedirect("status");
+			return;
+		}
+
+		if(!request.getParameter("id").matches("^[0-9]+$")) {
+			response.sendRedirect("status");
+			return;
+		}
+
+		if(userservice.getUser(Integer.parseInt(request.getParameter("id"))) == null) {
+			response.sendRedirect("status");
+			return;
+		}
+
 		if(session.getAttribute("editUser") == null) {
 			User editUser = userservice.getUser(Integer.parseInt(request.getParameter("id")));
 			session.setAttribute("editUser", editUser);
@@ -117,7 +132,7 @@ public class SettingsServlet extends HttpServlet {
 		int jobId = Integer.parseInt(request.getParameter("jobId"));
 
 
-		if (StringUtils.isEmpty(loginId) == true) {
+		if (StringUtils.isBlank(loginId) == true) {
 			messages.add("IDを入力してください");
 		}
 //		if (StringUtils.isEmpty(password) == true) {

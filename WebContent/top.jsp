@@ -10,6 +10,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<link href="css/topStyle.css" rel="stylesheet" type="text/css">
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>○○社INFORMATION</title>
 
@@ -45,12 +46,15 @@ function DisableButton(b)
    b.form.submit();
 }
 
-function init() {
-	document.getElementById('button').disabled = true;
-	}
+function get() {
+	document.getElementsByClassName("button").disabled = true;
 	function doChange() {
-	var txtValue = document.getElementById('text').value;
-	document.getElementById('button').disabled = (txtValue.length == 0);
+	var txtValue = document.getElementsByClassName("text").value;
+	for( var i = 0, txtValue = list.length; i < txtValue; i++ ) {
+		txtValue[i].onchange = function (){
+			}
+		}
+		document.getElementsByClassName("button").disabled = (txtValue.length == 0);
 	}
 
 
@@ -60,88 +64,97 @@ function init() {
 <body onLoad="init();">
 <h3>○○社INFORMATION</h3>
 
-<div class="main-contents">
-
-<a href="newMessage">新規投稿入力ページ</a>
+<div class="nav">
+<ul class="nl clearFix">
+<li><a href="newMessage">新規投稿ページ</a></li>
 
 <c:if test="${loginUser.jobId == 1}" >
-	<a href="status">社員アカウント管理ページ</a>
+	<li><a href="status">社員アカウント管理ページ</a></li>
 </c:if>
 
-<a href="logout">ログアウト</a><br />
-
-<c:out value="${loginUser.name}でログイン中です"></c:out>
-
-<div class="header"></div>
+<li><a href="logout">ログアウト</a></li>
+</ul>
 
 </div>
+<br ><p class="loginUser"><c:out value="現在${loginUser.name}でログイン中です"></c:out></p>
 </body>
-<div class="messages">
-<form action="./"><br />
+<div class="categoryBox">
+<p class="selectategory" ${絞込みこーなー}></p>
+<form action="./" style="display: inline"><br />
 カテゴリー指定
 <select name="categories">
 	<option value="" selected>カテゴリーを選ぶ</option>
-	<c:forEach items="${categories}" var="category">
-		<option value="${category}"><c:out value="${category}"></c:out></option>
-	</c:forEach>
+		<c:forEach items="${categories}" var="category">
+			<c:if test="${lastCategory == category.category}">
+				<option value="${category.category}" selected>${category.category}</option>
+			</c:if>
+			<c:if test="${lastCategory != category.category}">
+				<option value="${category.category}">${category.category}</option>
+			</c:if>
+		</c:forEach>
 </select>
 日付指定
-	<input type="date" name="startDate" min="2017-07-31" max="${diaryDate}">
-	<input type="date" name="endDate" min="2017-07-31" max="${diaryDate}">
+	<input type="date" name="startDate" min="2017-07-31" max="${diaryDate}" value="${lastStart}">→
+	<input type="date" name="endDate" min="2017-07-31" max="${diaryDate}" value="${lastEnd}">
 	<button type="submit">絞込み</button>
 </form>
-
-
-
+<form action="./" style="display: inline"><button>全投稿表示する</button></form>
+<form action="./" style="display: inline" ><button value="toDay" name="toDay">本日"${toDayDate}"の投稿を表示する</button></form><br />
+</div>
 <c:forEach items="${messages}" var="message">
-	<div class="message">
-		<div class="account-name">
-			名前：<span class="name"><c:out value="${message.name}" /></span><br />
-			タイトル：<span class="title"><c:out value="${message.title}" /></span><br />
-			カテゴリー:<span class="category"><c:out value="${message.category}" /></span><br />
-			<p></p>
+	<div class="box">
+		<div class="subBox">
+			<div class="from">
+				投稿者：<span class="name"><c:out value="${message.name}" /></span>
+				タイトル：<span class="title"><c:out value="${message.title}" /></span>
+				カテゴリー:<span class="category"><c:out value="${message.category}" /></span>
+				<p></p>
+
+
+			内容
+			</div>
+			<c:forEach var="text" items="${fn:split(message.text, '
+		')}">
+		    <div>${text}</div>
+		</c:forEach>
+
+		<c:forEach items="${allbranches}" var="allbranche">
+			<c:if test="${message.branchId == allbranche.id}">
+				所属:<c:out value="${allbranche.name}" /><br />
+			</c:if>
+		</c:forEach>
+
+		<c:forEach items="${alljobs}" var="alljob">
+			<c:if test="${message.jobId == alljob.id}">
+				役職:<c:out value="${alljob.name}" /><br />
+			</c:if>
+		</c:forEach>
 		</div>
-	本文
-		<c:forEach var="text" items="${fn:split(message.text, '
-	')}">
-	    <div>${text}</div>
-	</c:forEach>
-
-	<c:forEach items="${allbranches}" var="allbranche">
-		<c:if test="${message.branchId == allbranche.id}">
-			所属:<c:out value="${allbranche.name}" /><br />
-		</c:if>
-	</c:forEach>
-
-	<c:forEach items="${alljobs}" var="alljob">
-		<c:if test="${message.jobId == alljob.id}">
-			役職:<c:out value="${alljob.name}" /><br />
-		</c:if>
-	</c:forEach>
-
-	投稿日時
-	<div class="date"><fmt:formatDate value="${message.createdAt}"
-	pattern="yyyy/MM/dd HH:mm:ss" /></div>
+		<div class="time">
+			投稿日時
+			<fmt:formatDate value="${message.createdAt}"
+			pattern="yyyy/MM/dd HH:mm:ss" />
+		</div>
 
 	<c:choose>
 		<c:when test="${loginUser.jobId == 2}">
 			<form action="Delete" method="post" onSubmit="return check()"><br />
-				<button type="submit" name="message_id" value="${message.id}">削除</button>
+				<button class="deleteButton" type="submit" name="message_id" value="${message.id}">投稿の削除</button>
 			</form>
 		</c:when>
 		<c:when test="${loginUser.id == message.userId}">
 			<form action="Delete" method="post" onSubmit="return check()"><br />
-				<button type="submit" name="message_id" value="${message.id}">削除</button>
+				<button class="deleteButton" type="submit" name="message_id" value="${message.id}">投稿の削除</button>
 			</form>
 		</c:when>
 		<c:when test="${loginUser.branchId == message.branchId && loginUser.jobID == 3}">
 			<form action="Delete" method="post" onSubmit="return check()"><br />
-				<button type="submit" name="message_id" value="${message.id}">削除</button>
+				<button class="deleteButton" type="submit" name="message_id" value="${message.id}">投稿の削除</button>
 			</form>
 		</c:when>
 	</c:choose>
 
-	</div>
+
 
 		<c:forEach items="${comments}" var="comment">
 			<c:if test="${message.id == comment.messageId}" >
@@ -169,20 +182,21 @@ function init() {
 						</c:if>
 					</c:forEach>
 
+
 				<c:choose>
 					<c:when test="${loginUser.jobId == 2}">
 						<form action="Delete" method="post" onSubmit="return check()"><br />
-							<button type="submit" name="comment_id" value="${comment.id}">削除</button>
+							<button class="deleteButton" type="submit" name="comment_id" value="${comment.id}">コメントの削除</button>
 						</form>
 					</c:when>
 					<c:when test="${loginUser.id == comment.userId}">
 						<form action="Delete" method="post" onSubmit="return check()"><br />
-							<button type="submit" name="comment_id" value="${comment.id}">削除</button>
+							<button class="deleteButton" type="submit" name="comment_id" value="${comment.id}">コメントの削除</button>
 						</form>
 					</c:when>
 					<c:when test="${loginUser.branchId == comment.branchId}">
 						<form action="Delete" method="post" onSubmit="return check()"><br />
-							<button type="submit" name="comment_id" value="${comment.id}">削除</button>
+							<button class="deleteButton" type="submit" name="comment_id" value="${comment.id}">コメントの削除</button>
 						</form>
 					</c:when>
 				</c:choose>
@@ -192,14 +206,16 @@ function init() {
 
 
 		<form action="newComment" method="post"><br />
-			<textarea  id="text" onChange="doChange();" style="resize:none" name="text" rows="4" cols="40" maxlength='500'></textarea>
-			<label style ="right"><500文字以下></label><br />
+			<textarea class="text"  name="text"  maxlength='500'></textarea>
+			<label style ="right">500文字以下</label><br />
 			<input type="hidden" name="message_id" value="${message.id}" />
-			<button id="button" type="submit"  name="loginUser" value="${loginUser.id}"
-			onclick="DisableButton(this);" disabled>コメント</button>
+			<button class="newComment" type="submit"  name="loginUser" value="${loginUser.id}"
+			onclick="DisableButton(this);"  >コメント投稿</button>
 			<p></p>
 		</form>
 
+	</div>
+
 </c:forEach>
-</div>
+
 </html>

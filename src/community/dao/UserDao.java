@@ -194,6 +194,8 @@ public class UserDao {
 		try {
 			StringBuilder sql = new StringBuilder();
 			sql.append("SELECT * FROM users");
+			sql.append(" ORDER BY branch_id ");
+			sql.append(",job_id asc");
 
 			ps = connection.prepareStatement(sql.toString());
 			ResultSet rs = ps.executeQuery();

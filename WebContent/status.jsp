@@ -6,6 +6,7 @@
 <!DOCTYPE html >
 <html>
 <head>
+<link href="css/loginstyle.css" rel="stylesheet" type="text/css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>社員アカウント管理</title>
 <script type="text/javascript">
@@ -61,15 +62,20 @@ function check(){
 			</td>
 			<td>
 				<form action="stopped" method="post" onSubmit="return check()">
-					<input type="hidden" name="id" value="${alluser.id}">
-					<c:if test="${alluser.isStopped == 0}">
-						<input type="hidden" name="isStopped" value=1>
-						<button type="submit">停止可能</button>
-					</c:if>
+					<c:if test="${loginUser.id != alluser.id}">
+						<input type="hidden" name="id" value="${alluser.id}">
+						<c:if test="${alluser.isStopped == 0}">
+							<input type="hidden" name="isStopped" value=1>
+							<button type="submit">停止可能</button>
+						</c:if>
 
-					<c:if test="${alluser.isStopped == 1}">
-						<input type="hidden" name="isStopped" value=0>
-						<button type="submit">停止解除</button>
+						<c:if test="${alluser.isStopped == 1}">
+							<input type="hidden" name="isStopped" value=0>
+							<button type="submit">停止解除</button>
+						</c:if>
+					</c:if>
+					<c:if test="${loginUser.id == alluser.id}">
+						<c:out value="ログイン中"></c:out>
 					</c:if>
 				</form>
 			</td>

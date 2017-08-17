@@ -28,14 +28,13 @@ public class SignUpServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws IOException, ServletException {
 
-
 		List<Branch> getAllBranch = new BranchService().getAllBranch();
 		request.setAttribute("allbranches", getAllBranch);
 
 		List<Job> getAllJob = new JobService().getAllJob();
 		request.setAttribute("alljobs", getAllJob);
 
-		request.getRequestDispatcher("signup.jsp").forward(request, response);
+		request.getRequestDispatcher("/signup.jsp").forward(request, response);
 	}
 
 	@Override
@@ -63,12 +62,19 @@ public class SignUpServlet extends HttpServlet {
 		} else {
 			session.setAttribute("errorMessages", messages);
 			request.setAttribute("user", users);
-			request.getRequestDispatcher("signup.jsp").forward(request, response);
+
+			List<Branch> getAllBranch = new BranchService().getAllBranch();
+			request.setAttribute("allbranches", getAllBranch);
+
+			List<Job> getAllJob = new JobService().getAllJob();
+			request.setAttribute("alljobs", getAllJob);
+
+			request.getRequestDispatcher("/signup.jsp").forward(request, response);
 		}
 	}
 
 	private boolean isValid(HttpServletRequest request, List<String> messages) {
-		String login_id = request.getParameter("loginId");
+		String loginId = request.getParameter("loginId");
 		String password = request.getParameter("password");
 		String newPassword = request.getParameter("newPassword");
 		String name = request.getParameter("name");
@@ -76,19 +82,19 @@ public class SignUpServlet extends HttpServlet {
 		int jobId = Integer.parseInt(request.getParameter("jobId"));
 
 
-		if (StringUtils.isBlank(login_id) == true) {
+		if (StringUtils.isBlank(loginId) == true) {
 			messages.add("IDを入力してください");
 		}
 		if (StringUtils.isBlank(password) == true) {
-			messages.add("パスワードを入力してください");
+			messages.add("パスワードを入力してください1");
 		}
 
-		if (password.matches("^[0-9a-zA-Z]+$") && 6 <= password.length() && password.length() <= 20) {
-			messages.add("パスワードを入力してください");
+		if (!(password.matches("^[0-9a-zA-Zｱ-ﾝ]+$")) && 6 <= password.length() && password.length() <= 20) {
+			messages.add("パスワードを入力してください2");
 		}
 
-		if (newPassword.matches("^[0-9a-zA-Z]+$") && 6 <= newPassword.length() && newPassword.length() <= 20) {
-			messages.add("パスワードを入力してください");
+		if (!(newPassword.matches("^[0-9a-zA-Zｱ-ﾝ]+$")) && 6 <= newPassword.length() && newPassword.length() <= 20) {
+			messages.add("パスワードを入力してください3");
 		}
 
 		if (StringUtils.isBlank(password) != true && StringUtils.isBlank(newPassword) != true) {
@@ -105,7 +111,7 @@ public class SignUpServlet extends HttpServlet {
 			messages.add("名前を10文字以内で入力してください");
 		}
 
-		if ( branchId == 0) {
+		if (branchId == 0) {
 			messages.add("所属を選択してください");
 		}
 

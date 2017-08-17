@@ -2,7 +2,6 @@ package community.controller;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -52,27 +51,37 @@ public class TopServlet extends HttpServlet {
 
 		Date date = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat tdd = new SimpleDateFormat("MM月dd日");
 		String startDate = "2017/7/31";
 		String endDate = sdf.format(date).toString();
+		String toDayDate = tdd.format(date).toString();
 		request.setAttribute("diaryDate", endDate);
+		request.setAttribute("toDayDate", toDayDate);
 
 		List<UserMessage> categoryList = new MessageService().getCategory();
-		List<String> categories = new ArrayList<String>();
-		for (int i = 0; i < categoryList.size(); i++) {
-			 categories.add(categoryList.get(i).getCategory());
+//		List<String> categories = new ArrayList<String>();
+//		for (int i = 0; i < categoryList.size(); i++) {
+//			 categories.add(categoryList.get(i).getCategory());
+//		}
+		session.setAttribute("categories", categoryList);
+
+		if (StringUtils.isBlank(request.getParameter("toDay")) == false) {
+			startDate = sdf.format(date).toString();
 		}
-		session.setAttribute("categories", categories);
 
 		if (StringUtils.isBlank(request.getParameter("startDate")) == false) {
 			startDate = request.getParameter("startDate");
+			request.setAttribute("lastStart", startDate);
 		}
 
 		if (StringUtils.isBlank(request.getParameter("endDate")) == false) {
 			endDate = request.getParameter("endDate");
+			request.setAttribute("lastEnd", endDate);
 		}
 
-		if (request.getParameter("categories") != null) {
+		if (StringUtils.isBlank(request.getParameter("categories")) == false) {
 			category = request.getParameter("categories");
+			request.setAttribute("lastCategory", category);
 		}
 
 		List<UserMessage> messageList = new MessageService().getMessage(startDate,endDate,category);
@@ -82,8 +91,9 @@ public class TopServlet extends HttpServlet {
 		List<UserComment> commentList = new CommentService().getComment();
 		request.setAttribute("comments", commentList);
 
-
-
+//		request.setAttribute("startDate", request.getParameter("startDate"));
+//		request.setAttribute("endDate", request.getParameter("endDate"));
+//		request.setAttribute("categories", request.getParameter("categories"));
 
 		request.getRequestDispatcher("/top.jsp").forward(request, response);
 	}

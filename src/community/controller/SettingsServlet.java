@@ -141,6 +141,20 @@ public class SettingsServlet extends HttpServlet {
 //		if (StringUtils.isEmpty(newPassword) == true) {
 //			messages.add("確認用パスワードを入力してください");
 //		}
+
+		if (!(password.matches("^[0-9a-zA-Zｱ-ﾝ]+$")) && 6 <= password.length() && password.length() <= 20) {
+			messages.add("パスワードを入力してください2");
+		}
+
+		if (!(newPassword.matches("^[0-9a-zA-Zｱ-ﾝ]+$")) && 6 <= newPassword.length() && newPassword.length() <= 20) {
+			messages.add("パスワードを入力してください3");
+		}
+
+
+		if (!(password.matches("^[ -~｡-ﾟ]+$")) && 6 <= password.length() && password.length() <= 20) {
+			messages.add("パスワードを入力してください2");
+		}
+
 		if (StringUtils.isBlank(password) != true && StringUtils.isBlank(newPassword) != true) {
 			if (!(password.contentEquals(newPassword))) {
 				messages.add("パスワードが一致しません");

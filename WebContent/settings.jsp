@@ -5,7 +5,7 @@
 <!DOCTYPE html >
 <html>
 <head>
-	<link href="css/loginstyle.css" rel="stylesheet" type="text/css">
+	<link href="css/settings.css" rel="stylesheet" type="text/css">
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>ユーザー編集</title>
 <script type="text/javascript">
@@ -28,9 +28,12 @@ function check(){
 </script>
 </head>
 <body>
-<h3>○○社　社員編集ページ</h3>
-
-<div class="main-contents">
+<h3 class="topTitle">社 員 編 集 ペ ー ジ</h3>
+<div class="nav">
+<ul class="nl clearFix">
+<li><a href="status">～アカウント管理に戻る～</a></li>
+</ul>
+</div>
 
 <c:if test="${ not empty errorMessages }">
 	<div class="errorMessages">
@@ -42,8 +45,9 @@ function check(){
 	</div>
 	<c:remove var="errorMessages" scope="session"/>
 </c:if>
-
+<div class="box">
 <form action="settings" method="post" onSubmit="return check()"><br />
+<div class="list">
 	<label for="loginId">ID</label>
 	<input name="loginId" value="${editUser.loginId}" /><br />6文字以上20文字以下、半角英数字のみ<br />
 
@@ -102,9 +106,9 @@ function check(){
 				</c:forEach>
 		</select><br />
 	</c:if>
+</div>
+	<button class="newButton" type="submit"  name="id" value="${editUser.id}">編集する</button><br />
 
-	<button type="submit"  name="id" value="${editUser.id}">編集</button><br />
-	<a href="status">ユーザー管理画面に戻る</a>
 </form>
 </div>
 </body>

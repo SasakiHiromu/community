@@ -6,7 +6,7 @@
 <!DOCTYPE html >
 <html>
 <head>
-<link href="css/loginstyle.css" rel="stylesheet" type="text/css">
+<link href="css/status.css" rel="stylesheet" type="text/css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>社員アカウント管理</title>
 <script type="text/javascript">
@@ -30,14 +30,22 @@ function check(){
 
 </head>
 <body>
-<h3>社員アカウント管理</h3>
-<a href="signup">入社登録</a>
-<table>
+<h3 class="topTitle">ア カ ウ ン ト 管 理 ペ ー ジ</h3>
+<div class="nav">
+<ul class="nl clearFix">
+<li><a href="signup">～新規入社登録～</a></li>
+<li><a href="./">～TOPへ戻る～</a></li>
+<li><a href="logout">～ログアウト～</a></li>
+</ul>
+</div>
+<table class="table">
 	<tr>
-		<th>id</th>
-		<th>名前</th>
-		<th>所属</th>
-		<th>役職</th>
+		<th scope="col">id</th>
+		<th scope="col">名前</th>
+		<th scope="col">所属</th>
+		<th scope="col">役職</th>
+		<th scope="col">社員編集</th>
+		<th scope="col">復活＆停止</th>
 	</tr>
 	<c:forEach items="${allusers}" var="alluser">
 		<tr>
@@ -74,14 +82,14 @@ function check(){
 							<button type="submit">停止解除</button>
 						</c:if>
 					</c:if>
-					<c:if test="${loginUser.id == alluser.id}">
-						<c:out value="ログイン中"></c:out>
+					<c:if  test="${loginUser.id == alluser.id}">
+						<c:out  value="ログイン中"></c:out>
 					</c:if>
 				</form>
 			</td>
 		</tr>
 	</c:forEach>
 </table>
-<a href="./">INFORMATIONへ戻る</a>
+
 </body>
 </html>

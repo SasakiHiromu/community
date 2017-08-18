@@ -2,10 +2,10 @@
 	pageEncoding="UTF-8"%>
 <%@page isELIgnored="false"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html >
 <html>
 <head>
-	<link href="css/loginstyle.css" rel="stylesheet" type="text/css">
+	<link href="css/signup.css" rel="stylesheet" type="text/css">
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>ユーザー登録</title>
 
@@ -29,8 +29,13 @@ function check(){
 </script>
 </head>
 <body>
-<h3>○○社　入社登録</h3>
-<div class="main-contents">
+<h3 class="topTitle" >新 規 入 社 登 録</h3>
+<div class="nav">
+<ul class="nl clearFix">
+<li><a href="status">～アカウント管理ページ～</a></li>
+<li><a href="logout">～ログアウト～</a></li>
+</ul>
+</div>
 <c:if test="${ not empty errorMessages }">
 	<div class="errorMessages">
 		<ul>
@@ -41,7 +46,9 @@ function check(){
 	</div>
 	<c:remove var="errorMessages" scope="session"/>
 </c:if>
+<div class="box">
 <form action="signup" method="post" onSubmit="return check()"><br />
+<div class="list">
 	<label for="loginId">ID</label>
 	<input name="loginId" id="loginId" value="${user.loginId}" maxlength="20"/><br />6文字以上20文字以下、半角英数字のみ<br />
 
@@ -82,10 +89,12 @@ function check(){
 				</c:if>
 			</c:forEach>
 	</select><br />
+	</div>
+	<input class="newButton" type="submit" value="新規登録" /> <br />
 
-	<input type="submit" value="登録" /> <br />
-	<a href="status">社員アカウント管理画面へ戻る</a>
+
 </form>
 </div>
+
 </body>
 </html>

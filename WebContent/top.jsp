@@ -10,7 +10,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<link href="css/topStyle.css" rel="stylesheet" type="text/css">
+	<link href="css/top.css" rel="stylesheet" type="text/css">
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>○○社INFORMATION</title>
 
@@ -62,17 +62,17 @@ function get() {
 
 </head>
 <body onLoad="init();">
-<h3>○○社INFORMATION</h3>
+<h3 class="topTitle">CHOKO CHOKO (株) TOP</h3>
 
 <div class="nav">
 <ul class="nl clearFix">
-<li><a href="newMessage">新規投稿ページ</a></li>
+<li><a href="newMessage">～新規投稿ページ～</a></li>
 
 <c:if test="${loginUser.jobId == 1}" >
-	<li><a href="status">社員アカウント管理ページ</a></li>
+	<li><a href="status">～社員アカウント管理ページ～</a></li>
 </c:if>
 
-<li><a href="logout">ログアウト</a></li>
+<li><a href="logout">～ログアウト～</a></li>
 </ul>
 
 </div>
@@ -81,6 +81,7 @@ function get() {
 <div class="categoryBox">
 <p class="selectategory" ${絞込みこーなー}></p>
 <form action="./" style="display: inline"><br />
+
 カテゴリー指定
 <select name="categories">
 	<option value="" selected>カテゴリーを選ぶ</option>
@@ -94,8 +95,8 @@ function get() {
 		</c:forEach>
 </select>
 日付指定
-	<input type="date" name="startDate" min="2017-07-31" max="${diaryDate}" value="${lastStart}">→
-	<input type="date" name="endDate" min="2017-07-31" max="${diaryDate}" value="${lastEnd}">
+	<input type="date" name="startDate"  max="${diaryDate}" value="${lastStart}">→
+	<input type="date" name="endDate" max="${diaryDate}" value="${lastEnd}">
 	<button type="submit">絞込み</button>
 </form>
 <form action="./" style="display: inline"><button>全投稿表示する</button></form>

@@ -39,7 +39,7 @@ function check(){
 	<div class="errorMessages">
 		<ul>
 			<c:forEach items="${errorMessages}" var="message">
-				<li><c:out value="${message}" />
+				<c:out value="${message}" /><br>
 			</c:forEach>
 		</ul>
 	</div>

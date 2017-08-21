@@ -143,7 +143,7 @@ public class SettingsServlet extends HttpServlet {
 //		}
 
 		if (!(password.matches("^[0-9a-zA-Zｱ-ﾝ]+$")) && 6 <= password.length() && password.length() <= 20) {
-			messages.add("パスワードを入力してください2");
+			messages.add("パスワードを入力してください");
 		}
 
 		if (!(newPassword.matches("^[0-9a-zA-Zｱ-ﾝ]+$")) && 6 <= newPassword.length() && newPassword.length() <= 20) {

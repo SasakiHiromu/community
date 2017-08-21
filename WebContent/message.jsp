@@ -61,7 +61,7 @@
 </div>
 	<br><label for="text">本文</label><br />
 	<div class="text">
-	<textarea style="resize: none;" name="text" cols="90" rows="10" maxlength="1000">${message.text}</textarea>
+	<textarea style="resize: none;" name="text" cols="90" rows="11" maxlength="1000">${message.text}</textarea>
 	<label>1000文字以下</label><br />
 	</div>
 

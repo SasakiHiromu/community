@@ -65,7 +65,7 @@ function check(){
 				</c:forEach>
 			<td>
 				<form action="settings" method="get">
-					<button type="submit"  name="id" value="${alluser.id}">編集</button>
+					<button type="submit"  name="id" value="${alluser.id}">編集ページへ</button>
 				</form>
 			</td>
 			<td>
@@ -74,12 +74,12 @@ function check(){
 						<input type="hidden" name="id" value="${alluser.id}">
 						<c:if test="${alluser.isStopped == 0}">
 							<input type="hidden" name="isStopped" value=1>
-							<button type="submit">停止可能</button>
+							<button type="submit">ユーザーの停止</button>
 						</c:if>
 
 						<c:if test="${alluser.isStopped == 1}">
 							<input type="hidden" name="isStopped" value=0>
-							<button type="submit">停止解除</button>
+							<button type="submit">ユーザーの復活</button>
 						</c:if>
 					</c:if>
 					<c:if  test="${loginUser.id == alluser.id}">

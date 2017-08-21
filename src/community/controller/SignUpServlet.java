@@ -86,15 +86,15 @@ public class SignUpServlet extends HttpServlet {
 			messages.add("IDを入力してください");
 		}
 		if (StringUtils.isBlank(password) == true) {
-			messages.add("パスワードを入力してください1");
+			messages.add("パスワードを入力してください");
 		}
 
 		if (!(password.matches("^[0-9a-zA-Zｱ-ﾝ]+$")) && 6 <= password.length() && password.length() <= 20) {
-			messages.add("パスワードを入力してください2");
+			messages.add("パスワードを入力してください");
 		}
 
 		if (!(newPassword.matches("^[0-9a-zA-Zｱ-ﾝ]+$")) && 6 <= newPassword.length() && newPassword.length() <= 20) {
-			messages.add("パスワードを入力してください3");
+			messages.add("パスワードを入力してください");
 		}
 
 		if (StringUtils.isBlank(password) != true && StringUtils.isBlank(newPassword) != true) {

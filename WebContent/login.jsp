@@ -16,22 +16,22 @@
 	<div class="errorMessages">
 		<ul>
 			<c:forEach items="${errorMessages}" var="message">
-				<li><c:out value="${message}" />
+				<c:out value="${message}" />
 			</c:forEach>
 		</ul>
 	</div>
 	<c:remove var="errorMessages" scope="session"/>
 </c:if>
 <div class="box">
-<form action="login" method="post" ><br />
+<form  class="sign-up" action="login" method="post" ><br />
 <div class="list">
 	<label for="loginId">ログインID</label>
-	 <p class="id"><input name="loginId"  id="loginId" value="${loginId}"/></p><br />
+	 <input class="sign-up-input" name="loginId"  id="loginId" value="${loginId}" placeholder="What's your LoginID?" autofocus/><br />
 
 	<label for="password">パスワード</label>
-	<p class="pass"><input name="password" type="password" id="password"/></p><br />
+	<input class="sign-up-input"  name="password" type="password" id="password" placeholder="Choose a Password"/><br />
 </div>
-	<p class="submit"><input type="submit" value="ログイン" /></p><br />
+	<p class="submit"><input class="sign-up-button" type="submit" value="ログイン" /></p><br />
 
 </form>
 </div>

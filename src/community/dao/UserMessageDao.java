@@ -68,6 +68,8 @@ public class UserMessageDao {
 				String title = rs.getString("title");
 				String category = rs.getString("category");
 				String text = rs.getString("text");
+				int branchId = rs.getInt("branch_id");
+				int jobId = rs.getInt("job_id");
 				int userId = rs.getInt("user_id");
 				Timestamp createdAt = rs.getTimestamp("created_at");
 
@@ -77,6 +79,8 @@ public class UserMessageDao {
 				message.setTitle(title);
 				message.setCategory(category);
 				message.setText(text);
+				message.setBranchId(branchId);
+				message.setJobId(jobId);
 				message.setUserId(userId);
 				message.setCreatedAt(createdAt);
 

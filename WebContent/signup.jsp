@@ -32,15 +32,14 @@ function check(){
 <h3 class="topTitle" >新 規 入 社 登 録</h3>
 <div class="nav">
 <ul class="nl clearFix">
-<li><a href="status">～アカウント管理ページ～</a></li>
-<li><a href="logout">～ログアウト～</a></li>
+<li><a href="status">～アカウント管理ページへ～</a></li>
 </ul>
 </div>
 <c:if test="${ not empty errorMessages }">
 	<div class="errorMessages">
 		<ul>
 			<c:forEach items="${errorMessages}" var="message">
-				<li><c:out value="${message}" />
+				<c:out value="${message}" /><br>
 			</c:forEach>
 		</ul>
 	</div>

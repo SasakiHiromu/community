@@ -98,7 +98,7 @@ public class NewMessageServlet extends HttpServlet {
 			messages.add("本文を入力してください");
 		}
 
-		if (text.length() >= 1000) {
+		if (text.length() > 1000) {
 			messages.add("本文を1000文字以下で入力してください");
 		}
 

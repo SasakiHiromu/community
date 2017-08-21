@@ -32,10 +32,10 @@ function check(){
 }
 
 //送信ボタンを押した際に送信ボタンを無効化する（連打による多数送信回避）
-$(function(){
-	$('[type="submit"]').click(function(){
-		$(this).prop('disabled',true);//ボタンを無効化する
-		$(this).closest('form').submit();//フォームを送信する
+(function(){
+	('[type="submit"]').click(function(){
+		(this).prop('disabled',true);//ボタンを無効化する
+		(this).closest('form').submit();//フォームを送信する
 	});
 });
 
@@ -45,18 +45,6 @@ function DisableButton(b)
 
    b.form.submit();
 }
-
-function get() {
-	document.getElementsByClassName("button").disabled = true;
-	function doChange() {
-	var txtValue = document.getElementsByClassName("text").value;
-	for( var i = 0, txtValue = list.length; i < txtValue; i++ ) {
-		txtValue[i].onchange = function (){
-			}
-		}
-		document.getElementsByClassName("button").disabled = (txtValue.length == 0);
-	}
-
 
 </script>
 
@@ -76,7 +64,7 @@ function get() {
 </ul>
 
 </div>
-<br ><p class="loginUser"><c:out value="現在${loginUser.name}でログイン中です"></c:out></p>
+<br ><p class="loginUser"><c:out value="${loginUser.name}でログイン中です"></c:out></p>
 </body>
 <div class="categoryBox">
 <p class="selectategory" ${絞込みこーなー}></p>
@@ -106,9 +94,20 @@ function get() {
 	<div class="box">
 		<div class="subBox">
 			<div class="from">
-				投稿者：<span class="name"><c:out value="${message.name}" /></span>
-				タイトル：<span class="title"><c:out value="${message.title}" /></span>
-				カテゴリー:<span class="category"><c:out value="${message.category}" /></span>
+				投稿者：<span class="name"><c:out value="${message.name}" /></span>　
+				タイトル：<span class="title"><c:out value="${message.title}" /></span>　
+				カテゴリー:<span class="category"><c:out value="${message.category}" /><br ></span>
+				<c:forEach items="${allbranches}" var="allbranche">
+					<c:if test="${message.branchId == allbranche.id}">
+						所属:<span><c:out value="${allbranche.name}" /></span>　
+					</c:if>
+				</c:forEach>
+
+				<c:forEach items="${alljobs}" var="alljob">
+					<c:if test="${message.jobId == alljob.id}">
+						役職:<c:out value="${alljob.name}" /><br />
+					</c:if>
+				</c:forEach>
 				<p></p>
 
 
@@ -116,20 +115,9 @@ function get() {
 			</div>
 			<c:forEach var="text" items="${fn:split(message.text, '
 		')}">
-		    <div>${text}</div>
+		    <div class="textBreak">${text}</div>
 		</c:forEach>
 
-		<c:forEach items="${allbranches}" var="allbranche">
-			<c:if test="${message.branchId == allbranche.id}">
-				所属:<c:out value="${allbranche.name}" /><br />
-			</c:if>
-		</c:forEach>
-
-		<c:forEach items="${alljobs}" var="alljob">
-			<c:if test="${message.jobId == alljob.id}">
-				役職:<c:out value="${alljob.name}" /><br />
-			</c:if>
-		</c:forEach>
 		</div>
 		<div class="time">
 			投稿日時
@@ -148,7 +136,7 @@ function get() {
 				<button class="deleteButton" type="submit" name="message_id" value="${message.id}">投稿の削除</button>
 			</form>
 		</c:when>
-		<c:when test="${loginUser.branchId == message.branchId && loginUser.jobID == 3}">
+		<c:when test="${loginUser.branchId == message.branchId && loginUser.jobId == 3}">
 			<form action="Delete" method="post" onSubmit="return check()"><br />
 				<button class="deleteButton" type="submit" name="message_id" value="${message.id}">投稿の削除</button>
 			</form>
@@ -159,12 +147,8 @@ function get() {
 
 		<c:forEach items="${comments}" var="comment">
 			<c:if test="${message.id == comment.messageId}" >
-
-				<c:forEach var="text" items="${fn:split(comment.text, '
-				')}">
-				    <div>${text}</div>
-				</c:forEach>
-
+			<div class="commentBox">
+				<div class="from">
 					<c:forEach items="${allusers}" var="alluser">
 						<c:if test="${alluser.id == comment.userId}">
 							コメント記入者:<c:out value="${alluser.name}" /><br />
@@ -173,7 +157,7 @@ function get() {
 
 					<c:forEach items="${allbranches}" var="allbranche">
 						<c:if test="${comment.branchId == allbranche.id}">
-							所属:<c:out value="${allbranche.name}" /><br />
+							所属:<c:out value="${allbranche.name}" />　
 						</c:if>
 					</c:forEach>
 
@@ -182,7 +166,13 @@ function get() {
 							役職:<c:out value="${alljob.name}" /><br />
 						</c:if>
 					</c:forEach>
-
+					内容
+						</div>
+					<c:forEach var="text" items="${fn:split(comment.text, '
+					')}">
+					    <div class="commentBreak">${text}</div>
+					</c:forEach>
+					</div>
 
 				<c:choose>
 					<c:when test="${loginUser.jobId == 2}">

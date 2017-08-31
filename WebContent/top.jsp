@@ -31,6 +31,7 @@ function check(){
 
 }
 
+
 //送信ボタンを押した際に送信ボタンを無効化する（連打による多数送信回避）
 (function(){
 	('[type="submit"]').click(function(){
@@ -66,6 +67,7 @@ function DisableButton(b)
 </div>
 <br ><p class="loginUser"><c:out value="${loginUser.name}でログイン中です"></c:out></p>
 </body>
+<script type="text/javascript"></script>
 <div class="categoryBox">
 <p class="selectategory" ${絞込みこーなー}></p>
 <form action="./" style="display: inline"><br />

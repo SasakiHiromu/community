@@ -85,7 +85,12 @@ public class SignUpServlet extends HttpServlet {
 		if (StringUtils.isBlank(loginId) == true) {
 			messages.add("IDを入力してください");
 		}
+
 		if (StringUtils.isBlank(password) == true) {
+			messages.add("パスワードを入力してください");
+		}
+
+		if (StringUtils.isBlank(newPassword) == true) {
 			messages.add("パスワードを入力してください");
 		}
 

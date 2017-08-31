@@ -38,10 +38,7 @@ public class UserMessageDao {
 
 			ps = connection.prepareStatement(sql.toString());
 			ps.setString(1, startDate + " 00:00:00");
-			ps.setString(2, endDate + " 23:59:59"
-
-
-					);
+			ps.setString(2, endDate + " 23:59:59");
 
 			if (StringUtils.isBlank(category) == false) {
 				ps.setString(3, category);

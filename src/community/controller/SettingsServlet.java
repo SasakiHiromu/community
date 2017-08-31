@@ -135,24 +135,25 @@ public class SettingsServlet extends HttpServlet {
 		if (StringUtils.isBlank(loginId) == true) {
 			messages.add("IDを入力してください");
 		}
-//		if (StringUtils.isEmpty(password) == true) {
-//			messages.add("パスワードを入力してください");
-//		}
-//		if (StringUtils.isEmpty(newPassword) == true) {
-//			messages.add("確認用パスワードを入力してください");
-//		}
+
+		if (StringUtils.isBlank(password) == true) {
+			messages.add("パスワードを入力してください");
+		}
+		if (StringUtils.isBlank(newPassword) == true) {
+			messages.add("確認用パスワードを入力してください");
+		}
 
 		if (!(password.matches("^[0-9a-zA-Zｱ-ﾝ]+$")) && 6 <= password.length() && password.length() <= 20) {
 			messages.add("パスワードを入力してください");
 		}
 
 		if (!(newPassword.matches("^[0-9a-zA-Zｱ-ﾝ]+$")) && 6 <= newPassword.length() && newPassword.length() <= 20) {
-			messages.add("パスワードを入力してください3");
+			messages.add("パスワードを入力してください");
 		}
 
 
 		if (!(password.matches("^[ -~｡-ﾟ]+$")) && 6 <= password.length() && password.length() <= 20) {
-			messages.add("パスワードを入力してください2");
+			messages.add("パスワードを入力してください");
 		}
 
 		if (StringUtils.isBlank(password) != true && StringUtils.isBlank(newPassword) != true) {

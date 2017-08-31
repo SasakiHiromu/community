@@ -54,7 +54,7 @@ function check(){
 	<label for="password">パスワード</label>
 	<input name="password" type="password" id="password" value="${user.password}" maxlength="20"/><br />6文字以上20文字以下、半角英数字のみ<br />
 
-	<label for="password">パスワード(確認用)</label>
+	<label for="newPassword">パスワード(確認用)</label>
 	<input name="newPassword" type="password" maxlength="20"/><br />6文字以上20文字以下、半角英数字のみ<br />
 
 	<label for="name">名前</label>
